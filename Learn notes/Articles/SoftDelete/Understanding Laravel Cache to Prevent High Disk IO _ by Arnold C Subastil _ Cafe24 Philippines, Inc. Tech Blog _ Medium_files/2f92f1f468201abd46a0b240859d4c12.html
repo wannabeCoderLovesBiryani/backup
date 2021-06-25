@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://medium.com/media/2f92f1f468201abd46a0b240859d4c12 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>api routes – Medium</title><meta name="description" content="api routes. GitHub Gist: instantly share code, notes, and snippets."><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./48870fc4954a69b8670158dc1bb33c2c.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-f710d4a619fe68a1be4400197b4c3132.css"><div id="gist95815620" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-api-php" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-php  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-api-php-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-api-php-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-ent">&lt;?php</span></td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-api-php-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-api-php-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">post</span>(<span class="pl-s">'/v1/notes'</span>, <span class="pl-s">'NotesController@create'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-api-php-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">get</span>(<span class="pl-s">'/v1/notes'</span>, <span class="pl-s">'NotesController@allNotes'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-api-php-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">delete</span>(<span class="pl-s">'v1/notes/{id}'</span>, <span class="pl-s">'NotesController@permanentDelete'</span>); <span class="pl-c">//this on first permanent delete models</span></td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-api-php-LC6" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">delete</span>(<span class="pl-s">'v2/notes/{id}'</span>, <span class="pl-s">'NotesController@softDelete'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-api-php-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">get</span>(<span class="pl-s">'v2/notes/withsoftdelete'</span>,<span class="pl-s">'NotesController@notesWithSoftDelete'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-api-php-LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">get</span>(<span class="pl-s">'v2/notes/softdeleted'</span>,<span class="pl-s">'NotesController@softDeleted'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-api-php-LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">patch</span>(<span class="pl-s">'/v1/notes/{id}'</span>,<span class="pl-s">'NotesController@restore'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-api-php-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-api-php-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-v">Route</span>::<span class="pl-en">delete</span>(<span class="pl-s">'v3/notes/{id}'</span>,<span class="pl-s">'NotesController@permanentDeleteSoftDeleted'</span>);</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/chrisoemma/48870fc4954a69b8670158dc1bb33c2c/raw/2a01a8c955f6b887aa6a7de56d8ac52d3c308a50/api.php" style="float:right">view raw</a>
+        <a href="https://gist.github.com/chrisoemma/48870fc4954a69b8670158dc1bb33c2c#file-api-php">api.php</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200; if (document) {document.domain = document.domain;}function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height);var elements = document.getElementsByClassName("gist-data"); for (var i = 0; i < elements.length; i++) {elements[i].style.overflow = "visible"}resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.location && window.location.hash === "#amp=1" && window.parent && window.parent.postMessage) {window.parent.postMessage({sentinel: "amp", type: "embed-size", height: height}, "*");}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {try {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);} catch(error) {console.log('maybeResize error: ', error)}}maybeResize();</script><script defer="" src="./beacon.min.js" data-cf-beacon="{&quot;rayId&quot;:&quot;65d5633779fb90ca&quot;,&quot;token&quot;:&quot;0b5f665943484354a59c39c6833f7078&quot;,&quot;version&quot;:&quot;2021.5.2&quot;,&quot;si&quot;:10}"></script>
+</body></html>

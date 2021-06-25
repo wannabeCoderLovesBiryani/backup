@@ -1,0 +1,18 @@
+php artisan make:model Product  -m -f 
+php artisan make:model Product  -m -f -c
+
+composer require barryvdh/laravel-dompdf
+
+
+So go to a config >> app.php and add the following configuration.
+'providers' => [
+    ....
+    Barryvdh\DomPDF\ServiceProvider::class,
+],
+'aliases' => [
+    ....
+    'PDF' => Barryvdh\DomPDF\Facade::class,
+],
+
+
+

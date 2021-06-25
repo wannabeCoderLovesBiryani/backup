@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://medium.com/media/98b168970a62e609bf9865b2410bda75 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>create method for making new note – Medium</title><meta name="description" content="create method for making new note. GitHub Gist: instantly share code, notes, and snippets."><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./7d00c0cc322c224de5053292aea254f0.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-f710d4a619fe68a1be4400197b4c3132.css"><div id="gist95815924" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-create-php" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-php  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-create-php-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-create-php-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-ent">&lt;?php</span></td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-create-php-LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c">//create new article</span></td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-create-php-LC3" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">create</span>(<span class="pl-smi">Request</span> <span class="pl-s1"><span class="pl-c1">$</span>request</span>)</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-create-php-LC4" class="blob-code blob-code-inner js-file-line">    {</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-create-php-LC5" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-create-php-LC6" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>rules</span> = [</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-create-php-LC7" class="blob-code blob-code-inner js-file-line">            <span class="pl-s">'name'</span> =&gt; <span class="pl-s">'required|string'</span>,</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-create-php-LC8" class="blob-code blob-code-inner js-file-line">        ];</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-create-php-LC9" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-create-php-LC10" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>validator</span> = <span class="pl-v">Validator</span>::<span class="pl-en">make</span>(<span class="pl-s1"><span class="pl-c1">$</span>request</span>-&gt;<span class="pl-en">all</span>(), <span class="pl-s1"><span class="pl-c1">$</span>rules</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-create-php-LC11" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">if</span> (<span class="pl-s1"><span class="pl-c1">$</span>validator</span>-&gt;<span class="pl-en">fails</span>()) {</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-create-php-LC12" class="blob-code blob-code-inner js-file-line">            <span class="pl-s1"><span class="pl-c1">$</span>response</span>[<span class="pl-s">'data'</span>] = <span class="pl-s1"><span class="pl-c1">$</span>validator</span>-&gt;<span class="pl-en">messages</span>();</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-create-php-LC13" class="blob-code blob-code-inner js-file-line">            <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-c1">$</span>response</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-create-php-LC14" class="blob-code blob-code-inner js-file-line">        }</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-create-php-LC15" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-create-php-LC16" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>note</span> = <span class="pl-k">new</span> <span class="pl-v">Note</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-create-php-LC17" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>note</span>-&gt;<span class="pl-c1">name</span> = <span class="pl-s1"><span class="pl-c1">$</span>request</span>-&gt;<span class="pl-c1">name</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-create-php-LC18" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>note</span>-&gt;<span class="pl-en">save</span>();</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-create-php-LC19" class="blob-code blob-code-inner js-file-line">        <span class="pl-s1"><span class="pl-c1">$</span>response</span> = <span class="pl-s1"><span class="pl-c1">$</span><span class="pl-smi">this</span></span>-&gt;<span class="pl-en">successfulMessage</span>(<span class="pl-c1">201</span>, <span class="pl-s">'Successfully created'</span>, <span class="pl-c1">true</span>, <span class="pl-s1"><span class="pl-c1">$</span>note</span>-&gt;<span class="pl-en">count</span>(), <span class="pl-s1"><span class="pl-c1">$</span>note</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-create-php-LC20" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">return</span> <span class="pl-en">response</span>(<span class="pl-s1"><span class="pl-c1">$</span>response</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-create-php-LC21" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-create-php-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-create-php-LC22" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/chrisoemma/7d00c0cc322c224de5053292aea254f0/raw/c9e49292e182167a0de8f335263eb7d00363de21/create.php" style="float:right">view raw</a>
+        <a href="https://gist.github.com/chrisoemma/7d00c0cc322c224de5053292aea254f0#file-create-php">create.php</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200; if (document) {document.domain = document.domain;}function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height);var elements = document.getElementsByClassName("gist-data"); for (var i = 0; i < elements.length; i++) {elements[i].style.overflow = "visible"}resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.location && window.location.hash === "#amp=1" && window.parent && window.parent.postMessage) {window.parent.postMessage({sentinel: "amp", type: "embed-size", height: height}, "*");}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {try {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);} catch(error) {console.log('maybeResize error: ', error)}}maybeResize();</script><script defer="" src="./beacon.min.js" data-cf-beacon="{&quot;rayId&quot;:&quot;65d5633cda5090ca&quot;,&quot;token&quot;:&quot;0b5f665943484354a59c39c6833f7078&quot;,&quot;version&quot;:&quot;2021.5.2&quot;,&quot;si&quot;:10}"></script>
+</body></html>

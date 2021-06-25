@@ -1,0 +1,46 @@
+composer create-project laravel/laravel restaurant-netninjapizzahouse
+php artisan make:controller PizzaController --resource --model=Pizza
+cd restaurant-netninjapizzahouse 
+[Another NEW Terminal]
+cd /opt/lampp
+sudo ./xampp startapache
+sudo ./xampp startmysql
+[PREVIOUS TERMINAL]
+cd restaurant-netninjapizzahouse 
+
+php artisan make:model Pizza
+php artisan make:seeder PizzaSeeder
+php artisan make:migration create_pizzas_table
+ [Migrations are version control for database strucutures]
+    [php artisan make:migration create_zebras_table  
+
+    KEY: create_xxxxx_table
+
+    Actually starts working on zebras table.
+     Schema::create('zebras', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+    
+    ]
+ php artisan make:migration add_to_pizzas_table 
+ [WORKS
+  KEY: add__xxxxx_to_xxxxx__table
+           ^optional 
+  ]
+  make database and table in phpmyadmin
+  array: $table->json('arr1');
+  edit in my .env to connect
+  migrate
+
+  stroing an array-->
+  Will be stored as json string in database
+    1) cast approach: Model retrieves json string from database and converts it to array. So controller gets array b
+    2) json_encode: Controller json_encodes the array and converts it 
+
+Laravel 5.1 comes with a feature called model factories that are designed to allow you to quickly build out “fake” models. 
+These have several use cases with the two biggest being–testing and database seeding. 
+
+php artisan make:factory PizzaFactory --model=Pizza
+
+php artisan make:controller PizzaController --resource --model=Pizza

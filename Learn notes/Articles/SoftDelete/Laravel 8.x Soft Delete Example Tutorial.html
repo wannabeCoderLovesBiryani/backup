@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0075)https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script async="" type="text/javascript" src="./Laravel 8.x Soft Delete Example Tutorial_files/ezosuigenerisc.js"></script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/rules-p-31iz6hfFutd16.js" async=""></script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/quant.js" async="" type="text/javascript"></script><script async="" src="./Laravel 8.x Soft Delete Example Tutorial_files/5fda641f0f936b0013a393f7.js"></script><script type="text/javascript" async="" src="./Laravel 8.x Soft Delete Example Tutorial_files/analytics.js"></script><script async="" type="text/javascript" src="./Laravel 8.x Soft Delete Example Tutorial_files/gpt.js"></script><script type="text/javascript" async="" src="./Laravel 8.x Soft Delete Example Tutorial_files/f.txt"></script><script async="" type="text/javascript" src="./Laravel 8.x Soft Delete Example Tutorial_files/gpt.js"></script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="">var __ez=__ez||{};__ez.stms=Date.now();__ez.evt={};__ez.script={};__ez.ck=__ez.ck||{};__ez.template={};__ez.template.isOrig=false;__ez.queue=(function(){var count=0,incr=0,items=[],timeDelayFired=false,hpItems=[],lpItems=[],allowLoad=true;var obj={func:function(name,funcName,parameters,isBlock,blockedBy,deleteWhenComplete,proceedIfError){var self=this;this.name=name;this.funcName=funcName;this.parameters=parameters===null?null:(parameters instanceof Array)?parameters:[parameters];this.isBlock=isBlock;this.blockedBy=blockedBy;this.deleteWhenComplete=deleteWhenComplete;this.isError=false;this.isComplete=false;this.isInitialized=false;this.proceedIfError=proceedIfError;this.isTimeDelay=false;this.process=function(){log("... func = "+name);self.isInitialized=true;self.isComplete=true;log("... func.apply: "+name);var funcs=self.funcName.split('.');var func=null;if(funcs.length>3){}else if(funcs.length===3){func=window[funcs[0]][funcs[1]][funcs[2]];}else if(funcs.length===2){func=window[funcs[0]][funcs[1]];}else{func=window[self.funcName];}
+if(typeof func!=='undefined'&&func!==null){func.apply(null,this.parameters);}
+if(self.deleteWhenComplete===true)delete items[name];if(self.isBlock===true){log("----- F'D: "+self.name);processAll();}}},file:function(name,path,isBlock,blockedBy,async,defer,proceedIfError){var self=this;this.name=name;this.path=path;this.async=async;this.defer=defer;this.isBlock=isBlock;this.blockedBy=blockedBy;this.isInitialized=false;this.isError=false;this.isComplete=false;this.proceedIfError=proceedIfError;this.isTimeDelay=false;this.process=function(){self.isInitialized=true;log("... file = "+name);var scr=document.createElement('script');scr.src=path;if(async===true)scr.async=true;else if(defer===true)scr.defer=true;scr.onerror=function(){log("----- ERR'D: "+self.name);self.isError=true;if(self.isBlock===true){processAll();}};scr.onreadystatechange=scr.onload=function(){var state=scr.readyState;log("----- F'D: "+self.name);if((!state||/loaded|complete/.test(state))){self.isComplete=true;if(self.isBlock===true){processAll();}}};document.getElementsByTagName('head')[0].appendChild(scr);}},fileLoaded:function(name,isComplete){this.name=name;this.path="";this.async=false;this.defer=false;this.isBlock=false;this.blockedBy=[];this.isInitialized=true;this.isError=false;this.isComplete=isComplete;this.proceedIfError=false;this.isTimeDelay=false;this.process=function(){};}};function init(){window.addEventListener("load",function(){setTimeout(function(){timeDelayFired=true;log('TDELAY -----');processAll();},5000);},false);}
+function addFile(name,path,isBlock,blockedBy,async,defer,proceedIfError,priority){var item=new obj.file(name,path,isBlock,blockedBy,async,defer,proceedIfError);if(priority===true){hpItems[name]=item}else{lpItems[name]=item}
+items[name]=item;checkIfBlocked(item);}
+function setallowLoad(settobool){allowLoad=settobool}
+function addFunc(name,func,parameters,isBlock,blockedBy,autoInc,deleteWhenComplete,proceedIfError,priority){if(autoInc===true)name=name+"_"+incr++;var item=new obj.func(name,func,parameters,isBlock,blockedBy,deleteWhenComplete,proceedIfError);if(priority===true){hpItems[name]=item}else{lpItems[name]=item}
+items[name]=item;checkIfBlocked(item);}
+function addTimeDelayFile(name,path){var item=new obj.file(name,path,false,[],false,false,true);item.isTimeDelay=true;log(name+' ... '+' FILE! TDELAY');lpItems[name]=item;items[name]=item;checkIfBlocked(item);}
+function addTimeDelayFunc(name,func,parameters){var item=new obj.func(name,func,parameters,false,[],true,true);item.isTimeDelay=true;log(name+' ... '+' FUNCTION! TDELAY');lpItems[name]=item;items[name]=item;checkIfBlocked(item);}
+function checkIfBlocked(item){if(isBlocked(item)===true||allowLoad==false)return;item.process();}
+function isBlocked(item){if(item.isTimeDelay===true&&timeDelayFired===false){log(item.name+" blocked = TIME DELAY!");return true;}
+if(item.blockedBy instanceof Array){for(var i=0;i<item.blockedBy.length;i++){var block=item.blockedBy[i];if(items.hasOwnProperty(block)===false){log(item.name+" blocked = "+block);return true;}else if(item.proceedIfError===true&&items[block].isError===true){return false;}else if(items[block].isComplete===false){log(item.name+" blocked = "+block);return true;}}}
+return false;}
+function markLoaded(filename){if(!filename||0===filename.length){return;}
+if(filename in items){var item=items[filename];if(item.isComplete===true){log(item.name+' '+filename+': error loaded duplicate')}else{item.isComplete=true;item.isInitialized=true;}}else{items[filename]=new obj.fileLoaded(filename,true);}
+log("markLoaded dummyfile: "+items[filename].name);}
+function logWhatsBlocked(){for(var i in items){if(items.hasOwnProperty(i)===false)continue;var item=items[i];isBlocked(item)}}
+function log(msg){var href=window.location.href;var reg=new RegExp('[?&]ezq=([^&#]*)','i');var string=reg.exec(href);var res=string?string[1]:null;if(res==="1")console.debug(msg);}
+function processAll(){count++;if(count>200)return;log("let's go");processItems(hpItems);processItems(lpItems);}
+function processItems(list){for(var i in list){if(list.hasOwnProperty(i)===false)continue;var item=list[i];if(item.isComplete===true||isBlocked(item)||item.isInitialized===true||item.isError===true){if(item.isError===true){log(item.name+': error')}else if(item.isComplete===true){log(item.name+': complete already')}else if(item.isInitialized===true){log(item.name+': initialized already')}}else{item.process();}}}
+init();return{addFile:addFile,addDelayFile:addTimeDelayFile,addFunc:addFunc,addDelayFunc:addTimeDelayFunc,items:items,processAll:processAll,setallowLoad:setallowLoad,markLoaded:markLoaded,logWhatsBlocked:logWhatsBlocked,};})();__ez.evt.add=function(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent?e.attachEvent("on"+t,n):e["on"+t]=n()},__ez.evt.remove=function(e,t,n){e.removeEventListener?e.removeEventListener(t,n,!1):e.detachEvent?e.detachEvent("on"+t,n):delete e["on"+t]};__ez.script.add=function(e){var t=document.createElement("script");t.src=e,t.async=!0,t.type="text/javascript",document.getElementsByTagName("head")[0].appendChild(t)};__ez.dot={};</script>
+<script>var __sellerid="9256f34e8eef48a0300a4a4962db477b";</script>
+<link rel="preload" as="script" href="./Laravel 8.x Soft Delete Example Tutorial_files/gpt.js">
+<link href="https://ad.doubleclick.net/" rel="dns-prefetch">
+<link href="https://pagead2.googlesyndication.com/" rel="dns-prefetch">
+<link href="https://googleads.g.doubleclick.net/" rel="dns-prefetch">
+<link href="https://tpc.googlesyndication.com/" rel="dns-prefetch">
+<link href="https://adservice.google.com/" rel="dns-prefetch">
+<link href="https://secureads.g.doubleclick.net/" rel="dns-prefetch">
+<link href="https://www.googletagservices.com/" rel="dns-prefetch">
+<link rel="preload" as="script" href="https://go.ezodn.com/hb/dall.js?b=amx,criteo,oftmedia,oneVideo,onemobile,onetag,sharethrough&amp;cb=194-0-22">
+<script type="text/javascript">
+	var __banger_pmp_deals=function(){var d={17:{"DealId":17,"Floor":160},18:{"DealId":18,"Floor":25},19:{"DealId":19,"Floor":100}};return[{"SlotName":"/1254144/codecheef_org-box-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-large-mobile-banner-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-banner-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-medrectangle-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-medrectangle-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-box-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-large-billboard-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-banner-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-leader-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-medrectangle-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-medrectangle-1","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-large-billboard-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-large-billboard-2","Deals":[d[17],d[18],d[19]]},{"SlotName":"/1254144/codecheef_org-large-billboard-2","Deals":[d[17],d[18],d[19]]}]}();
+</script>
+<script type="text/javascript">_ebcids=[138231308856,138231308940,138231308949,138231387842,138231421744,138231421759,138231421774,138231421783,138231421789,138231421792,138242067587,138242067590,138242067602,138242067605,138242067608,138242067614,138242229406,138242229415,138242229421,138242229430];</script>
+<script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">ezobv=19;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">function ez_isclean(data){if(typeof data==='undefined'){data=document.URL;}
+var re=/(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))(@|%2540|%40)((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;var isClean=!re.test(data);return isClean;}
+var ezSlotKVStore={};function ezSetSlotTargeting(divid,key,value){var slot=ezGetSlotById(divid);if(slot){slot.setTargeting(key,value);}else{if(typeof ezSlotKVStore[divid]=='undefined'){ezSlotKVStore[divid]={};}
+ezSlotKVStore[divid][key]=value;}}
+function ezGetSlotById(id){if(typeof window.ezslots==='undefined'||window.ezslots==0){return;}
+for(var i=0;i<window.ezslots.length;i++){var slot=window[ezslots[i]];if(typeof slot==='undefined'){continue;}
+var slotId=slot.getSlotElementId();if(typeof slotId!=='undefined'&&slotId==id){return slot;}}}
+var ez_queue=new Array();function sort_queue(a,b)
+{if(a.priority<b.priority)return-1;else if(a.priority==b.priority)return 0;else return 1;}
+function execute_ez_queue()
+{ez_queue.sort(sort_queue);for(var i in ez_queue)
+{if(typeof ez_queue[i].method!="undefined")
+{try{ez_queue[i].method.call(null);}
+catch(err){}}}}
+window.ez_ad_units=new Array();window.ezslots=new Array();window.ezsrqt={};function ez_write_tag(d){if(ez_isclean()&&d instanceof Array){if(typeof ezstandalone!=='undefined'&&typeof ezstandalone.selectedPlaceholders!=='undefined'&&ezstandalone.selectedPlaceholders[d[3]]===true){return "1+1";}
+ez_ad_units[ez_ad_units.length]=d;var dve="";if(typeof d[5]!='undefined'&&d[5]>0){dve='_'+d[5];}
+var ezcmd="googletag.cmd.push(function() {var divid = 'div-gpt-ad-"+d[1]+"-"+d[4]+""+dve+"';if(typeof ezlrarn == 'function'){ezlrarn(divid);}googletag.display(divid);var to = 0;if("+d[2]+".getTargeting('ga')[0] == '0'){to = 500;}if((window.ezDisableInitialLoad==true || googletag.pubads().isInitialLoadDisabled()) && window.ezoll != true){setTimeout(function(){googletag.pubads().refresh(["+d[2]+"])},to);}});";return ezcmd;}
+return "1+1";}
+function in_array(needle,haystack){var length=haystack.length;for(var i=0;i<length;i++){if(haystack[i]==needle)return true;}
+return false;}
+var ezrpos=new Array();var ez_current_interval;var ez_current_load=0;function __ez_fad_load(n,r){if(__ez_fad_csnt()&&__ez_fad_rdy()&&ezslit_run[n]!=true&&typeof __ez_fad_divs[n]!='undefined'&&__ez_fad_divs[n].length>0){ezslit_run[n]=true;__ez_fad_gpt();if(n>0&&n!=5){__ez_fad_pb();}
+googletag.cmd.push(function(){var s=[];for(var i=0;i<__ez_fad_divs[n].length;i++){if(__ez_fad_divsd.indexOf(__ez_fad_divs[n][i])==-1){__ez_fad_divsd.push(__ez_fad_divs[n][i]);s.push(__ez_fad_initslot[__ez_fad_divs[n][i]](r));googletag.display(__ez_fad_divs[n][i]);}};var ws=[];for(i3=0;i3<s.length;i3++){ws.push(window[s[i3]]);}
+googletag.pubads().refresh(ws);setTimeout(__ez_fad_floatshow,0);});if(n==0){document.addEventListener('DOMContentLoaded',function(evt){googletag.cmd.push(function(){__ez_fad_load(5,null);});setTimeout(googletag.cmd.push(function(){__ez_fad_floatshow()}),500);setTimeout(function(){__ez_fad_load(1,null);},5500);},false);}}}
+var __ez_fad_floatshowd=false;function __ez_fad_floatshow(d){if(__ez_fad_floatshowd==false&&typeof __ez_fad_floating!='undefined'){__ez_fad_floatshowd=true;var e=document.getElementById('ezmobfooter');if(e!=null){e.classList.add('ezmobtrans');}else{head=document.head||document.getElementsByTagName('head')[0],style=document.createElement('style');head.appendChild(style);var css="body > #ezmobfooter{bottom:0px !important;visibility:visible;}";style.type='text/css';if(style.styleSheet){style.styleSheet.cssText=css;}else{style.appendChild(document.createTextNode(css));}}
+googletag.cmd.push(function(){for(var i=0;i<__ez_fad_floating.length;i++){var s=__ez_fad_initslot[__ez_fad_floating[i]](null);googletag.display(__ez_fad_floating[i]);googletag.pubads().refresh([window[s]]);}});}}
+var __ez_fad_initslot={};var __ez_fad_fastd=[];var __ez_fad_fastdiv=[];var __ez_fad_fastslots=[];var __ez_fad_viewslots=[];var __ez_fad_instaslots=[];var ezslit_run=[];var __ez_fad_divs=[[],[],[],[],[],[],[]];__ez_fad_divpos={};var __ez_fad_divsd=[];var __ez_fad_vw=window.screen.width;var __ez_fad_vh=window.screen.height;function __ez_fad_invisible(e){!!(e.offsetWidth||e.offsetHeight||e.getClientRects().length)}
+function __ez_fad_position(id){var did=document.getElementById(id);if(did!=null){var rect=did.getBoundingClientRect();var vs=window.scrollY||document.body.scrollTop||document.documentElement.scrollTop;var vh=vs+__ez_fad_vh;_ez_fad_vw=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth;__ez_fad_vh=window.innerHeight||Math.max(document.documentElement.clientHeight,document.body.clientHeight);var height_adjust=800;if(__ez_fad_vw<1200){height_adjust=__ez_fad_vh*1.25;vh+=0;}
+if(__ez_fad_floating.indexOf(id)==-1){__ez_fad_divpos[id]=rect.top;if(__ez_fad_invisible(did)&&isFloat!=true){__ez_fad_divs[4].push(id);}else if(rect.top<vh&&(ezslit_run[0]!=true||ezslit_run[5]!=true)){if(ezslit_run[0]!=true){__ez_fad_gpt();__ez_fad_divs[0].push(id);}else{__ez_fad_divs[5].push(id);}}else if(rect.top<(vh+height_adjust)&&ezslit_run[1]!=true){if(ezslit_run[0]!=true){__ez_fad_load(0,0);};__ez_fad_divs[1].push(id);}else if(rect.top<(vh+height_adjust+(__ez_fad_vh))&&ezslit_run[2]!=true){if(ezslit_run[0]!=true){__ez_fad_load(0,0);};__ez_fad_divs[2].push(id);}else{__ez_fad_divs[3].push(id);}}}}
+function __ez_fad_fast(s,f,m){if(__ez_fad_fastd.indexOf(s)==-1){__ez_fad_fastd.push(s);googletag.cmd.push(function(){var ebbr2='empty';var br2=0;if(typeof ezoibfh[f]!='undefined'){ebbr2=ezoibfh[f];br2=f;}
+if(typeof window['ezslot_'+s]!='undefined'){var br1=parseInt(window['ezslot_'+s].getTargeting('br1')[0]);if(isNaN(br1)||br2<br1){window['ezslot_'+s].setTargeting('br1',br2).setTargeting('eb_br',ebbr2);if(m!=null){window['ezslot_'+s].setTargeting('bvr',m)}}else{}}else{}});}}
+function __ez_fad_csnt(){return document.cookie.indexOf('ezCMPCookieConsent')!==-1||typeof __ez_conestreq=='undefined';}
+var __ez_fad_haspo=false;if(typeof PerformanceObserver!='undefined'&&typeof PerformanceObserver.supportedEntryTypes!='undefined'){if(PerformanceObserver.supportedEntryTypes.indexOf('largest-contentful-paint')>-1){__ez_fad_haspo=true;}}
+function __ez_fad_rdy(){if(document.body!==null&&(__ez_fad_haspo==false&&__ez_fad_doc_ht>__ez_fad_vp_ht||__ez_fad_hascp)||document.readyState==="complete"){return true;}else{__ez_fad_doc_ht=__ez_fad_docht();__ez_fad_vp_ht=__ez_fad_vpht();}
+return false;}
+function __ez_fad_docht(){if(typeof document.body!='undefined'&&document.body!=null){return Math.max(document.body.scrollHeight,document.body.offsetHeight);}else if(typeof document.documentElement!='undefined'){return Math.max(document.documentElement.clientHeight,document.documentElement.scrollHeight,document.documentElement.offsetHeight);}else{return 0;}}
+function __ez_fad_vpht(){if(typeof window.innerHeight!='undefined'){return window.innerHeight;}else if(typeof document.body!='undefined'&&document.body!=null){return document.body.clientHeight;}else if(typeof document.documentElement!='undefined'){return document.documentElement.clientHeight;}
+else{return 0;}}
+var __ez_fad_doc_ht=__ez_fad_docht();var __ez_fad_vp_ht=__ez_fad_vpht();var __ez_fad_hascp=false;try{const __ez__fad_po=new PerformanceObserver((entryList)=>{__ez_fad_hascp=true;});__ez__fad_po.observe({type:'largest-contentful-paint',buffered:true});}catch(e){}</script><script type="text/javascript" data-ezscrex="false">var ezorbf = []; </script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.isEZABL=false;window.ezmadspc=300;window.ezoViewCheck=false;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.ezDisableInitialLoad=false;</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.googletag=window.googletag||{};googletag.cmd=googletag.cmd||[];</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">(function(){var gads=document.createElement('script');gads.async=true;gads.type='text/javascript';var useSSL='https:'==document.location.protocol;gads.src=(useSSL?'https:':'http:')+
+'//securepubads.g.doubleclick.net/tag/js/gpt.js';var node=document.getElementsByTagName('script')[0];node.parentNode.insertBefore(gads,node);})();</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="" type="text/javascript">window.ezogetbrkey = function(s){ var k = 'br1';var k2 = 'eb_br';if(window.ezogtk == ""){k='br1u';k2='eb_bru';}else if(window.ezogtk != "NT"){k='br1t';k2='eb_brt';} s.setTargeting('br1', s.getTargeting(k));s.setTargeting('eb_br', s.getTargeting(k2));};googletag.cmd.push(function() {googletag.pubads().enableSingleRequest();googletag.pubads().addEventListener('slotRenderEnded', function(event) { __ez.queue.addFunc("ezbanger", "ezbanger", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('impressionViewable', function(event) { __ez.queue.addFunc("ezvb", "ezvb", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotResponseReceived', function(event) { __ez.queue.addFunc("ezsr", "ezsr", event, false, ['banger.js'], true, true, false, true); });googletag.pubads().addEventListener('slotRequested', function(e) { window.ezsrqt[e.slot.getSlotElementId()] = Date.now();});googletag.pubads().disableInitialLoad();googletag.pubads().enableLazyLoad({fetchMarginPercent: -1, renderMarginPercent: 250, mobileScaling: 2.0});googletag.enableServices();});window.ezoll = false;window.ezoadxnc = '1254144';window.ezoadhb = '280';var ezoibfh = {0:'zero',1000000:'off',260:'57914c3716312cb7e954090f0717ea25',200:'86802a923a1f32517e4c5d3b6d550271',70:'527e52c10635ac8136a4c84094ee49a8',90:'b355e9227b551c119a30a68852723b62',38:'23b5ca1d9de2587e6a4ecfd33d61b709',26:'bf9a045b836005b6c23b7b0749249612',6:'33dd523f8e4dda158f0aa99686dda7f2',280:'c16fac08e79a971524b1c6834f5caad3',220:'43aa1607a0c08c74b14a9039e7b909b4',160:'3530fcb6bcc13dc3c1712eaef7d92700',46:'fe5b0c99ab7ba15f050582be1301303f',30:'54d0fa6d5f6aabe7623cb24faa42a441',12:'14e8a85d4c42ff1db8790cbef9e33493',10:'291d27313eb66c50243129b23df8a579',80:'dfa60cee6e1053fc0c9e607c8047bd28',50:'3ba982fc4238dd4197b1d51b345478dc',44:'a928cf2c3ad36f5e9ed2d90f655c1dc9',42:'947f1d5169cc7d0f997560e34838fb04',36:'8c5ffefb122f59a66a8b7672d4452af2',22:'1e913e99b80640fd5b86a539e5b97c94',14:'ad0061a38dd7c6f7bcb692aee88dfda4',240:'8de2c8ca79e8623e3cb37120a35ebaa2',140:'af063c244089b52ec5a0423a258f1f8e',34:'a7a863b24978e69c4cdbb5a49be70d5e',2:'b6c98a8bb15764f1c4ee331dcb724178',28:'674294a1b21a1e89fc99c14c9b17be44',24:'e66c30deca31b19eda212eeca1258584',20:'7432360301409ae695ba255f16fbcf06',8:'2e8b8c60843e52e5aaa1e3a52287a2bb',100:'a495ce7dbb4cefcd3e0a722048894f41',48:'8fc09e60bfd78aa82afac0405213359a',40:'ee685f77592ce296910ee91457d66ba3',4:'9c3e4ee8eae7f1433cb2fe69b1326605',180:'9ae587f95e95c876b7b76fd4c72a3838',120:'58ef7bddb438af5e257c4377f32c243a',60:'c352ba581bd3ffd8cea608cf2d55f519',32:'d31e71883d00099e275b6c5878eed023',18:'8de355ef1cf56b7da61277050d9957b1',16:'e29f69dd468d31a5514dc9b5587ce757'};window.ezorefgsl=function(r){Array.isArray(r)||(r=[r]);for(var e=r.length,o=Array(),a=0;a<e;a++){var t=r[a];t.setTargeting("reqt",Date.now()),void 0!==t.DFPSlot?o.push(t.DFPSlot):o.push(t)}googletag.pubads().refresh(o)};var ezaxmns={};var ezaucmns={};ezaxmns["div-gpt-ad-codecheef_org-banner-2-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-banner-2-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-box-1-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-box-1-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-medrectangle-2-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-medrectangle-2-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-medrectangle-1-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-medrectangle-1-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-medrectangle-1-0_1"]=0;ezaucmns["div-gpt-ad-codecheef_org-medrectangle-1-0_1"]=0;ezaxmns["div-gpt-ad-codecheef_org-medrectangle-1-0_2"]=0;ezaucmns["div-gpt-ad-codecheef_org-medrectangle-1-0_2"]=0;ezaxmns["div-gpt-ad-codecheef_org-banner-1-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-banner-1-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-large-mobile-banner-1-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-large-mobile-banner-1-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-large-billboard-2-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-large-billboard-2-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-large-billboard-2-0_1"]=0;ezaucmns["div-gpt-ad-codecheef_org-large-billboard-2-0_1"]=0;ezaxmns["div-gpt-ad-codecheef_org-large-billboard-2-0_2"]=0;ezaucmns["div-gpt-ad-codecheef_org-large-billboard-2-0_2"]=0;ezaxmns["div-gpt-ad-codecheef_org-large-billboard-2-0_3"]=0;ezaucmns["div-gpt-ad-codecheef_org-large-billboard-2-0_3"]=0;ezaxmns["div-gpt-ad-codecheef_org-leader-1-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-leader-1-0"]=0;ezaxmns["div-gpt-ad-codecheef_org-box-2-0"]=0;ezaucmns["div-gpt-ad-codecheef_org-box-2-0"]=0;
+
+		var __ez_fad_floating = ['div-gpt-ad-codecheef_org-medrectangle-2-0'];
+		var __ez_fad_gptd = false;var __ez_fad_ezpbinitd = false;function __ez_fad_gpt(){if(__ez_fad_gptd == false){__ez_fad_gptd=true;(function(){var gads=document.createElement('script');gads.async=true;gads.type='text/javascript';var useSSL='https:'==document.location.protocol;gads.src=(useSSL?'https:':'http:')+
+'//securepubads.g.doubleclick.net/tag/js/gpt.js';var node=document.getElementsByTagName('script')[0];node.parentNode.insertBefore(gads,node);})();}}function __ez_fad_pb(){if(__ez_fad_ezpbinitd==false && typeof __ez_fad_ezpbinit == 'function'){__ez_fad_ezpbinitd = true;__ez_fad_ezpbinit()}};
+		__ez_fad_initslot['div-gpt-ad-codecheef_org-banner-2-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-banner-2-0';
+				ezslot_8 = googletag.defineSlot('/1254144/codecheef_org-banner-2',[300,250],'div-gpt-ad-codecheef_org-banner-2-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1285246','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1105','sap':'1105','a':'|251|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'8','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'31','al':'1031','compid':'0','tap':'codecheef_org-banner-2-1285246','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'15','bvm':'0','bvr':'5','shp':'2','ftsn':'3','br1':'240','br2':'120','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,815,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[8]="8";ezslots.push("ezslot_8");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-2-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-2-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_8";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-2-0'); __ez_fad_fast('8',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-banner-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-2-0'); __ez_fad_fast('8',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-banner-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-2-0'); __ez_fad_fast('8',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-box-1-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-box-1-0';
+				ezslot_13 = googletag.defineSlot('/1254144/codecheef_org-box-1',[[250,250],[300,250],[320,100],[120,240],[200,200],[180,150],[125,125],[234,60],[336,280],[320,50],['fluid']],'div-gpt-ad-codecheef_org-box-1-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1266196','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1103','sap':'1103','a':'|2|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'13','reft':'n','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'0','al':'1000','compid':'0','tap':'codecheef_org-box-1-1266196','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'24','bvm':'0','bvr':'2','shp':'2','ftsn':'3','acptad':'1','br1':'240','br2':'120','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,815,899,919]}).setCollapseEmptyDiv(false);ezrpos[13]="13";ezslots.push("ezslot_13");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-box-1-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-box-1-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_13";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-box-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-1-0'); __ez_fad_fast('13',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-box-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-1-0'); __ez_fad_fast('13',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-box-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-1-0'); __ez_fad_fast('13',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-medrectangle-2-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-medrectangle-2-0';
+				ezslot_4 = googletag.defineSlot('/1254144/codecheef_org-medrectangle-2',[728,90],'div-gpt-ad-codecheef_org-medrectangle-2-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1286446','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1100','sap':'1100','a':'|3|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'4','reft':'n','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'5','al':'1005','compid':'0','tap':'codecheef_org-medrectangle-2-1286446','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'24','bvm':'0','bvr':'2','shp':'1','ftsn':'3','br1':'240','br2':'120','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,29,30,760,761,813,814,815,816,817,818,819,899,917,918,919]}).setCollapseEmptyDiv(false);ezrpos[4]="4";ezslots.push("ezslot_4");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-2-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-2-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_4";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-2-0'); __ez_fad_fast('4',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-medrectangle-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-2-0'); __ez_fad_fast('4',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-medrectangle-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-2-0'); __ez_fad_fast('4',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-medrectangle-1-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-medrectangle-1-0';
+				ezslot_9 = googletag.defineSlot('/1254144/codecheef_org-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-medrectangle-1-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1272196','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1108','sap':'1108','a':'|5|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'9','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'codecheef_org-medrectangle-1-1272196','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'13','bvm':'0','bvr':'3','shp':'3','ftsn':'3','acptad':'1','br1':'240','br2':'120','ezoic':'1','nmau':'3','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,919]}).setCollapseEmptyDiv(false);ezrpos[9]="9";ezslots.push("ezslot_9");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_9";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0'); __ez_fad_fast('9',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-medrectangle-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0'); __ez_fad_fast('9',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-medrectangle-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0'); __ez_fad_fast('9',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-medrectangle-1-0_1'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-medrectangle-1-0_1';
+				ezslot_10 = googletag.defineSlot('/1254144/codecheef_org-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-medrectangle-1-0_1').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1272196','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1108','sap':'1108','a':'|6|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'10','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'codecheef_org-medrectangle-1-1272196','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'13','bvm':'0','bvr':'3','shp':'3','ftsn':'3','acptad':'1','br1':'240','br2':'120','ezoic':'1','nmau':'3','mau':'1','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,919]}).setCollapseEmptyDiv(false);ezrpos[10]="10";ezslots.push("ezslot_10");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_1'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_1']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_10";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_1'); __ez_fad_fast('10',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-medrectangle-1-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_1'); __ez_fad_fast('10',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-medrectangle-1-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_1'); __ez_fad_fast('10',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-medrectangle-1-0_2'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-medrectangle-1-0_2';
+				ezslot_11 = googletag.defineSlot('/1254144/codecheef_org-medrectangle-1',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-medrectangle-1-0_2').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1272196','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1108','sap':'1108','a':'|6|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'11','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'4','al':'1004','compid':'0','tap':'codecheef_org-medrectangle-1-1272196','eb_br':'8de2c8ca79e8623e3cb37120a35ebaa2','eba':'1','asau':'2716849759','bv':'13','bvm':'0','bvr':'3','shp':'3','ftsn':'3','acptad':'1','br1':'240','br2':'120','ezoic':'1','nmau':'3','mau':'2','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,919]}).setCollapseEmptyDiv(false);ezrpos[11]="11";ezslots.push("ezslot_11");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_2'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_2']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_11";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-medrectangle-1-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_2'); __ez_fad_fast('11',80,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-medrectangle-1-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_2'); __ez_fad_fast('11',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-medrectangle-1-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-medrectangle-1-0_2'); __ez_fad_fast('11',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-banner-1-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-banner-1-0';
+				ezslot_7 = googletag.defineSlot('/1254144/codecheef_org-banner-1',[[250,250],[125,125],[300,250],[320,50],[468,60],[320,100],[120,240],[580,400],[336,280],[200,200],[180,150],[234,60],['fluid']],'div-gpt-ad-codecheef_org-banner-1-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1267096','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1125','sap':'1125','a':'|6|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'7','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'30','al':'1030','compid':'0','tap':'codecheef_org-banner-1-1267096','eb_br':'57914c3716312cb7e954090f0717ea25','eba':'1','asau':'2716849759','bv':'4','bvm':'0','bvr':'4','shp':'1','ftsn':'3','br1':'260','br2':'120','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,815,899,919]}).setCollapseEmptyDiv(false);ezrpos[7]="7";ezslots.push("ezslot_7");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-1-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-1-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_7";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-1-0'); __ez_fad_fast('7',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-1-0'); __ez_fad_fast('7',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-banner-1-0'); __ez_fad_fast('7',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-large-mobile-banner-1-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-large-mobile-banner-1-0';
+				ezslot_6 = googletag.defineSlot('/1254144/codecheef_org-large-mobile-banner-1',[[336,280],[580,400],[320,50],[250,250],[320,100],[200,200],[180,150],[300,250],[468,60],[120,240],[125,125],[234,60],['fluid']],'div-gpt-ad-codecheef_org-large-mobile-banner-1-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid14':'1316446','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1116','sap':'1116','a':'|2|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'6','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'703','al':'1703','compid':'0','tap':'codecheef_org-large-mobile-banner-1-1316446','eb_br':'c16fac08e79a971524b1c6834f5caad3','eba':'1','asau':'2716849759','bv':'0','bvm':'2','bvr':'7','shp':'1','ftsn':'3','br1':'280','br2':'140','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,760,815,816,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[6]="6";ezslots.push("ezslot_6");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-large-mobile-banner-1-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-mobile-banner-1-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_6";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-mobile-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-mobile-banner-1-0'); __ez_fad_fast('6',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-large-mobile-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-mobile-banner-1-0'); __ez_fad_fast('6',220,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-large-mobile-banner-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-mobile-banner-1-0'); __ez_fad_fast('6',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-large-billboard-2-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-large-billboard-2-0';
+				ezslot_0 = googletag.defineSlot('/1254144/codecheef_org-large-billboard-2',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-large-billboard-2-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1282846','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1104','sap':'1104','a':'|251|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'0','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'0','al':'1034','compid':'0','tap':'codecheef_org-large-billboard-2-1282846','eb_br':'c16fac08e79a971524b1c6834f5caad3','eba':'1','asau':'2716849759','bv':'5','bvm':'0','bvr':'5','shp':'3','ftsn':'3','br1':'280','br2':'140','ezoic':'1','nmau':'4','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,29,760,761,815,816,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[0]="0";ezslots.push("ezslot_0");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_0";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0'); __ez_fad_fast('0',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-large-billboard-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0'); __ez_fad_fast('0',220,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-large-billboard-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0'); __ez_fad_fast('0',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-large-billboard-2-0_1'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-large-billboard-2-0_1';
+				ezslot_1 = googletag.defineSlot('/1254144/codecheef_org-large-billboard-2',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-large-billboard-2-0_1').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1282846','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1104','sap':'1104','a':'|251|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'1','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'0','al':'1034','compid':'0','tap':'codecheef_org-large-billboard-2-1282846','eb_br':'c16fac08e79a971524b1c6834f5caad3','eba':'1','asau':'2716849759','bv':'5','bvm':'0','bvr':'5','shp':'3','ftsn':'3','br1':'280','br2':'140','ezoic':'1','nmau':'4','mau':'1','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,29,760,761,815,816,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[1]="1";ezslots.push("ezslot_1");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_1'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_1']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_1";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_1'); __ez_fad_fast('1',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-large-billboard-2-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_1'); __ez_fad_fast('1',220,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-large-billboard-2-0_1'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_1'); __ez_fad_fast('1',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-large-billboard-2-0_2'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-large-billboard-2-0_2';
+				ezslot_2 = googletag.defineSlot('/1254144/codecheef_org-large-billboard-2',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-large-billboard-2-0_2').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1282846','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1104','sap':'1104','a':'|5|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'2','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'0','al':'1034','compid':'0','tap':'codecheef_org-large-billboard-2-1282846','eb_br':'c16fac08e79a971524b1c6834f5caad3','eba':'1','asau':'2716849759','bv':'5','bvm':'0','bvr':'5','shp':'3','ftsn':'3','br1':'280','br2':'140','ezoic':'1','nmau':'4','mau':'2','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,29,760,761,815,816,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[2]="2";ezslots.push("ezslot_2");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_2'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_2']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_2";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_2'); __ez_fad_fast('2',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-large-billboard-2-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_2'); __ez_fad_fast('2',220,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-large-billboard-2-0_2'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_2'); __ez_fad_fast('2',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-large-billboard-2-0_3'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-large-billboard-2-0_3';
+				ezslot_3 = googletag.defineSlot('/1254144/codecheef_org-large-billboard-2',[[300,250], ['fluid']],'div-gpt-ad-codecheef_org-large-billboard-2-0_3').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1282846','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1104','sap':'1104','a':'|3|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'3','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'0','al':'1034','compid':'0','tap':'codecheef_org-large-billboard-2-1282846','eb_br':'c16fac08e79a971524b1c6834f5caad3','eba':'1','asau':'2716849759','bv':'5','bvm':'0','bvr':'5','shp':'3','ftsn':'3','br1':'280','br2':'140','ezoic':'1','nmau':'4','mau':'3','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,28,29,760,761,815,816,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[3]="3";ezslots.push("ezslot_3");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_3'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_3']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_3";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-large-billboard-2-0_3'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_3'); __ez_fad_fast('3',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-large-billboard-2-0_3'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_3'); __ez_fad_fast('3',220,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-large-billboard-2-0_3'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-large-billboard-2-0_3'); __ez_fad_fast('3',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-leader-1-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-leader-1-0';
+				ezslot_5 = googletag.defineSlot('/1254144/codecheef_org-leader-1',[[336,280],[300,250],[320,50],[250,250],[320,100],[120,240],[125,125],[468,60],[200,200],[180,150],[580,400],[234,60],['fluid']],'div-gpt-ad-codecheef_org-leader-1-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid14':'1317496','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1114','sap':'1114','a':'|3|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'5','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'37','al':'1037','compid':'0','tap':'codecheef_org-leader-1-1317496','eb_br':'57914c3716312cb7e954090f0717ea25','eba':'1','asau':'2716849759','bv':'4','bvm':'0','bvr':'4','shp':'1','ftsn':'3','br1':'260','br2':'120','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,27,815,817,899,919]}).setCollapseEmptyDiv(false);ezrpos[5]="5";ezslots.push("ezslot_5");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-leader-1-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-leader-1-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_5";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-leader-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-leader-1-0'); __ez_fad_fast('5',90,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-leader-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-leader-1-0'); __ez_fad_fast('5',200,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-leader-1-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-leader-1-0'); __ez_fad_fast('5',0,0);};__ez_fad_initslot['div-gpt-ad-codecheef_org-box-2-0'] = function(bvr){
+				googletag.cmd.push(function() {
+				var did = 'div-gpt-ad-codecheef_org-box-2-0';
+				ezslot_12 = googletag.defineSlot('/1254144/codecheef_org-box-2',[970,250],'div-gpt-ad-codecheef_org-box-2-0').addService(googletag.pubads()).updateTargetingFromMap({'a':'1','iid13':'1282846','t':'134','d':'267458','t1':'134','pvc':'0','ap':'1130','sap':'1130','a':'|251|','as':'revenue','plat':'1','bra':'mod1','ic':'1','at':'mbf','adr':'399','ezosn':'12','reft':'tf','refs':'30','ga':'2497208','gala':'','rid':'99998','pt':'1','al':'1001','compid':'0','tap':'codecheef_org-box-2-1282846','eb_br':'9ae587f95e95c876b7b76fd4c72a3838','eba':'1','asau':'2716849759','bv':'13','bvm':'0','bvr':'3','shp':'1','ftsn':'3','acptad':'1','br1':'180','br2':'90','ezoic':'1','nmau':'0','mau':'0','stl':[63,14,28,4,51,0,88,0,71,30,0,31],'deal1':[20,21,22,23,24,25,26,919]}).setCollapseEmptyDiv(false);ezrpos[12]="12";ezslots.push("ezslot_12");
+				if(bvr != null){
+					if(typeof __ez_fad_fastslots['div-gpt-ad-codecheef_org-box-2-0'] == 'function') {
+						__ez_fad_fastslots['div-gpt-ad-codecheef_org-box-2-0']();
+					}
+				}
+				if(typeof ezSlotKVStore != 'undefined' && typeof ezSlotKVStore[did] != 'undefined') {
+					for (var name in ezSlotKVStore[did]) {
+						if (!ezSlotKVStore.hasOwnProperty(name)) {
+							ezSetSlotTargeting(did, name, ezSlotKVStore[did][name]);
+						}
+					}
+					ezSlotKVStore[did] = {};
+				}
+			});return "ezslot_12";};
+			__ez_fad_fastslots['div-gpt-ad-codecheef_org-box-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-2-0'); __ez_fad_fast('12',60,null);};
+			__ez_fad_viewslots['div-gpt-ad-codecheef_org-box-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-2-0'); __ez_fad_fast('12',140,null);};
+			__ez_fad_instaslots['div-gpt-ad-codecheef_org-box-2-0'] = function(){__ez_fad_fastdiv.push('div-gpt-ad-codecheef_org-box-2-0'); __ez_fad_fast('12',0,0);};</script>
+<script type="text/javascript">(function(){function storageAvailable(type){var storage;try{storage=window[type];var x='__storage_test__';storage.setItem(x,x);storage.removeItem(x);return true;}
+catch(e){return e instanceof DOMException&&(e.code===22||e.code===1014||e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED')&&(storage&&storage.length!==0);}}
+function remove_ama_config(){if(storageAvailable('localStorage')){localStorage.removeItem("google_ama_config");}}
+remove_ama_config()})()</script>
+<script type="text/javascript">var ezoicTestActive = true</script>
+<script data-ezscrex="false" type="text/javascript" data-cfasync="false">var _ezaq = {"ad_cache_level":1,"ad_count_adjustment":3,"ad_lazyload_version":2,"ad_load_version":2,"ad_location_ids":"34,34,34,34,5,37,703,30,31,4,4,4,1,0","ad_transform_level":0,"adx_ad_count":14,"bidder_method":1,"bidder_version":4,"city":"Dhaka","country":"BD","days_since_last_visit":2,"display_ad_count":8,"domain_id":267458,"ds_adsize_opt_id":-1,"engaged_time_visit":0,"ezcache_level":0,"ezcache_skip_code":0,"form_factor_id":1,"framework_id":1,"has_bad_image":0,"has_bad_words":0,"iab_category":"","is_from_recommended_pages":false,"is_return_visitor":true,"is_sitespeed":0,"last_page_load":"1623149304310","last_pageview_id":"dc2c3e8b-ab05-4a3d-5a4e-e63287696121","lt_cache_level":0,"max_ads":10,"metro_code":0,"optimization_version":1,"page_ad_positions":"1100,1103,1104,1104,1104,1104,1105,1108,1108,1108,1114,1116,1125,1130","page_view_count":0,"page_view_id":"450fc5d9-a9e9-4678-7ca3-923695de6740","position_selection_id":39,"postal_code":"1212","pv_event_count":0,"response_size_orig":43006,"response_time_orig":845,"serverid":"13.212.248.129:12615","state":"13","sub_page_ad_positions":"1100,1103,1104,1104,1104,1104,1105,1108,1108,1108,1114,1116,1125,1130","t_epoch":1623357734,"template_id":134,"time_on_site_visit":0,"url":"https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6","user_id":0,"weather_precipitation":0,"weather_summary":"","weather_temperature":0,"word_count":1207,"worst_bad_word_level":0};var _ezim_d = {"codecheef_org-banner-1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-banner-1/2021-06-10/1267096","height":"250","position_id":1125,"sub_position_id":1125,"width":"250"},"codecheef_org-banner-2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-banner-2/2021-06-10/1285246","height":"250","position_id":1105,"sub_position_id":1105,"width":"300"},"codecheef_org-box-1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-box-1/2021-06-10/1266196","height":"250","position_id":1103,"sub_position_id":1103,"width":"250"},"codecheef_org-box-2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-box-2/2021-06-10/1282846","height":"250","position_id":1130,"sub_position_id":1130,"width":"970"},"codecheef_org-large-billboard-2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-large-billboard-2/2021-06-10/1282846","height":"250v4","position_id":1104,"sub_position_id":1104,"width":"300"},"codecheef_org-large-billboard-2_1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-large-billboard-2/2021-06-10/1282846","height":"250v4","position_id":1104,"sub_position_id":1104,"width":"300"},"codecheef_org-large-billboard-2_2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-large-billboard-2/2021-06-10/1282846","height":"250v4","position_id":1104,"sub_position_id":1104,"width":"300"},"codecheef_org-large-billboard-2_3":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-large-billboard-2/2021-06-10/1282846","height":"250v4","position_id":1104,"sub_position_id":1104,"width":"300"},"codecheef_org-large-mobile-banner-1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-large-mobile-banner-1/2021-06-10/1316446","height":"280","position_id":1116,"sub_position_id":1116,"width":"336"},"codecheef_org-leader-1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-leader-1/2021-06-10/1317496","height":"280","position_id":1114,"sub_position_id":1114,"width":"336"},"codecheef_org-medrectangle-1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-medrectangle-1/2021-06-10/1272196","position_id":1108,"sub_position_id":1108},"codecheef_org-medrectangle-1_1":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-medrectangle-1/2021-06-10/1272196","position_id":1108,"sub_position_id":1108},"codecheef_org-medrectangle-1_2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-medrectangle-1/2021-06-10/1272196","position_id":1108,"sub_position_id":1108},"codecheef_org-medrectangle-2":{"adsense_stat_source_id":5,"adx_ad_count":14,"adx_stat_source_id":35,"full_id":"codecheef_org-medrectangle-2/2021-06-10/1286446","height":"90","position_id":1100,"sub_position_id":1100,"width":"728"}};var _ezat = {"domain_id":267458,"form_factor_id":1,"framework_id":1,"pageview_date":"2021-06-10","pageview_id":"450fc5d9-a9e9-4678-7ca3-923695de6740","template_id":134,"url":"https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6","visit_uuid":"11d8c837-4b0e-4af7-47d2-4da7a4d13faa"};</script><script data-ezscrex="false" data-pagespeed-no-defer="" data-cfasync="false" type="text/javascript">__ez.queue.addFile('banger.js', '/porpoiseant/banger.js?cb=194-0&bv=19&v=51&PageSpeed=off', true, [], true, false, false, true);</script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/banger.js" async=""></script>
+<script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="">__ez.vep=(function(){var pixels=[],pxURL="/detroitchicago/grapefruit.gif";function AddPixel(vID,pixelData){if(__ez.dot.isDefined(vID)&&__ez.dot.isValid(pixelData)){pixels.push({type:'video',video_impression_id:vID,domain_id:__ez.dot.getDID(),t_epoch:__ez.dot.getEpoch(0),data:__ez.dot.dataToStr(pixelData)});}}
+function Fire(){if(typeof document.visibilityState!=='undefined'&&document.visibilityState==="prerender"){return;}
+if(__ez.dot.isDefined(pixels)&&pixels.length>0){while(pixels.length>0){var j=5;if(j>pixels.length){j=pixels.length;}
+var pushPixels=pixels.splice(0,j);var pixelURL=__ez.dot.getURL(pxURL)+"?orig="+(__ez.template.isOrig===true?1:0)+"&v="+btoa(JSON.stringify(pushPixels));__ez.dot.Fire(pixelURL);}}
+pixels=[];}
+return{Add:AddPixel,Fire:Fire};})();</script><script data-ezscrex="false" data-cfasync="false" data-pagespeed-no-defer="">__ez.pel=(function(){var pixels=[],pxURL="/porpoiseant/army.gif";function AddAndFirePixel(adSlot,pixelData){AddPixel(adSlot,pixelData,0,0,0,0,0);Fire();}
+function AddAndFireOrigPixel(adSlot,pixelData){AddPixel(adSlot,pixelData,0,0,0,0,0,true);Fire();}
+function GetCurrentPixels(){return pixels;}
+function AddPixel(adSlot,pixelData,revenue,est_revenue,bid_floor_filled,bid_floor_prev,stat_source_id,isOrig){if(!__ez.dot.isDefined(adSlot)||__ez.dot.isAnyDefined(adSlot.getSlotElementId,adSlot.ElementId)==false){return;}
+var ad_position_id=parseInt(__ez.dot.getTargeting(adSlot,'ap'));var impId=__ez.dot.getSlotIID(adSlot),adUnit=__ez.dot.getAdUnit(adSlot,isOrig);var compId=parseInt(__ez.dot.getTargeting(adSlot,"compid"));var lineItemId=0;var creativeId=0;var ezimData=getEzimData(adSlot);if(typeof ezimData=='object'){if(ezimData.creative_id!==undefined){creativeId=ezimData.creative_id;}
+if(ezimData.line_item_id!==undefined){lineItemId=ezimData.line_item_id;}}
+if(__ez.dot.isDefined(impId,adUnit)&&__ez.dot.isValid(pixelData)){pixels.push({type:"impression",impression_id:impId,domain_id:__ez.dot.getDID(),unit:adUnit,t_epoch:__ez.dot.getEpoch(0),revenue:revenue,est_revenue:est_revenue,ad_position:ad_position_id,ad_size:"",bid_floor_filled:bid_floor_filled,bid_floor_prev:bid_floor_prev,stat_source_id:stat_source_id,country_code:__ez.dot.getCC(),pageview_id:__ez.dot.getPageviewId(),comp_id:compId,line_item_id:lineItemId,creative_id:creativeId,data:__ez.dot.dataToStr(pixelData),is_orig:isOrig||__ez.template.isOrig,});}}
+function AddPixelById(impFullId,pixelData,isOrig){var vals=impFullId.split('/');if(__ez.dot.isDefined(impFullId)&&vals.length===3&&__ez.dot.isValid(pixelData)){var adUnit=vals[0],impId=vals[2];pixels.push({type:"impression",impression_id:impId,domain_id:__ez.dot.getDID(),unit:adUnit,t_epoch:__ez.dot.getEpoch(0),pageview_id:__ez.dot.getPageviewId(),data:__ez.dot.dataToStr(pixelData),is_orig:isOrig||__ez.template.isOrig});}}
+function Fire(){if(typeof document.visibilityState!=='undefined'&&document.visibilityState==="prerender")return;if(__ez.dot.isDefined(pixels)&&pixels.length>0){var allPixels=[pixels.filter(function(pixel){return pixel.is_orig}),pixels.filter(function(pixel){return!pixel.is_orig})];allPixels.forEach(function(pixels){while(pixels.length>0){var isOrig=pixels[0].is_orig||false;var j=5;if(j>pixels.length){j=pixels.length;}
+var pushPixels=pixels.splice(0,j);var pixelURL=__ez.dot.getURL(pxURL)+"?orig="+(isOrig===true?1:0)+"&sts="+btoa(JSON.stringify(pushPixels));if(typeof window.isAmp!=='undefined'&&isAmp&&typeof window._ezaq!=='undefined'&&_ezaq.hasOwnProperty("domain_id")){pixelURL+="&visit_uuid="+_ezaq['visit_uuid'];}
+__ez.dot.Fire(pixelURL);}})}
+pixels=[];}
+function getEzimData(adSlot){if(typeof _ezim_d=="undefined"){return false}
+var adUnitName=__ez.dot.getAdUnitPath(adSlot).split('/').pop();if(typeof _ezim_d==='object'&&_ezim_d.hasOwnProperty(adUnitName)){return _ezim_d[adUnitName];}
+for(var ezimKey in _ezim_d){if(ezimKey.split('/').pop()===adUnitName){return _ezim_d[ezimKey];}}
+return false;}
+return{Add:AddPixel,AddAndFire:AddAndFirePixel,AddAndFireOrig:AddAndFireOrigPixel,AddById:AddPixelById,Fire:Fire,GetPixels:GetCurrentPixels,};})();</script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="p:domain_verify" content="bb8a4f9abed222d3fcc446542c18ce4c">
+    <meta name="google-site-verification" content="GmBgRrXUL7CbNYOHZNhQgjdz23rVTkwDX8sPNNW5DS0">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./Laravel 8.x Soft Delete Example Tutorial_files/js"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-185122457-1');
+    </script>
+        <title>Laravel 8.x Soft Delete Example Tutorial</title>
+        <meta name="description" content=" soft delete laravel 8,laravel 8 soft delete example, laravel soft delete, soft delete laravel 8 example, laravel deleted_at migration, laravel soft delete migration, laravel SoftDeletes, laravel use soft deletes, laravel soft delete not working,laravel soft delete relationship ">
+    <meta name="keywords" content=" soft delete laravel 8,laravel 8 soft delete example, laravel soft delete, soft delete laravel 8 example, laravel deleted_at migration, laravel soft delete migration, laravel SoftDeletes, laravel use soft deletes, laravel soft delete not working,laravel soft delete relationship ">
+    <meta property="og:title" content=" Laravel 8.x Soft Delete Example Tutorial  ">
+    <meta name="og:description" content=" soft delete laravel 8,laravel 8 soft delete example, laravel soft delete, soft delete laravel 8 example, laravel deleted_at migration, laravel soft delete migration, laravel SoftDeletes, laravel use soft deletes, laravel soft delete not working,laravel soft delete relationship ">
+    <meta property="og:site_name" content="CodeCheef">
+    <meta property="og:url" content=" https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6 ">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.codecheef.org/user/img/fevicon.png">
+    <meta name="author" content="mahedi hasan">
+    <meta property="article:tag" content="   Laravel 6,  Laravel,  Laravel Eloquent,  Soft Delete,  ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:image" content="https://www.codecheef.org/user/img/fevicon.png">
+    <meta name="twitter:site" content="@CodeCheef">
+    <meta name="twitter:creator" content="@CodeCheef">
+    <meta name="twitter:url" content=" https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6 ">
+    <meta name="twitter:title" content=" Laravel 8.x Soft Delete Example Tutorial  ">
+    <meta name="twitter:description" content=" soft delete laravel 8,laravel 8 soft delete example, laravel soft delete, soft delete laravel 8 example, laravel deleted_at migration, laravel soft delete migration, laravel SoftDeletes, laravel use soft deletes, laravel soft delete not working,laravel soft delete relationship ">
+    <meta name="Googlebot" content="index, follow">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="1 days">
+    <meta name="csrf-token" content="1MGNxhtdvytdsSrUwDpCRr03sMHV5eMMmaMkeKDL">
+    <script type="application/ld+json">
+    {
+        "publisher":
+        {
+            "@type":"Organization",
+            "logo":
+            {
+                "@type":"ImageObject",
+                "url":"https://www.codecheef.org/user/img/fevicon.png"
+            }
+        },
+        "description":" soft delete laravel 8,laravel 8 soft delete example, laravel soft delete, soft delete laravel 8 example, laravel deleted_at migration, laravel soft delete migration, laravel SoftDeletes, laravel use soft deletes, laravel soft delete not working,laravel soft delete relationship ",
+        "image":"https://www.codecheef.org/user/img/fevicon.png",
+        "url":" https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6 ",
+        "@type":"WebSite",
+        "headline":" Laravel 8.x Soft Delete Example Tutorial ",
+        "sameAs":["https://twitter.com/metacentric_sr","https://www.facebook.com/chiefcode","https://github.com/techmahedy"],
+        "name":"Mahedi Hasan","@context":"https://schema.org"
+    }
+    </script>
+    <link rel="canonical" href="https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6">
+    <link rel="icon" href="https://www.codecheef.org/user/img/fevicon.png">
+    <link rel="stylesheet" href="./Laravel 8.x Soft Delete Example Tutorial_files/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Laravel 8.x Soft Delete Example Tutorial_files/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link id="switcher" href="./Laravel 8.x Soft Delete Example Tutorial_files/bridge-theme.css" rel="stylesheet">
+    <link href="./Laravel 8.x Soft Delete Example Tutorial_files/style.css" rel="stylesheet">
+    <script type="text/javascript" src="./Laravel 8.x Soft Delete Example Tutorial_files/sharethis.js" async="async"></script>
+    
+      <link href="./Laravel 8.x Soft Delete Example Tutorial_files/prism.css" rel="stylesheet">
+ <style>.ezoic-ad.box-2130 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:970px;padding:0;text-align:center !important; }
+.ezoic-ad.banner-1125 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:250px;padding:0;text-align:center !important; }
+.ezoic-ad.leader-1114 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:280px;min-width:336px;padding:0;text-align:center !important; }
+.ezoic-ad.large-mobile-banner-1116 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:280px;min-width:336px;padding:0;text-align:center !important; }
+.ezoic-ad.box-1103 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:250px;padding:0;text-align:center !important; }
+.ezoic-ad.large-billboard-2 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:3px !important;margin-left:0px !important;margin-right:0px !important;margin-top:7px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.large-billboard-2 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:3px !important;margin-left:0px !important;margin-right:0px !important;margin-top:7px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.large-billboard-2 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:3px !important;margin-left:0px !important;margin-right:0px !important;margin-top:7px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.large-billboard-2 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:3px !important;margin-left:0px !important;margin-right:0px !important;margin-top:7px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.large-billboard-2104 { background:0 0 !important;display:block !important;float:none;line-height:0px;margin-left:auto !important;margin-right:auto !important;min-width:300px;padding:0;text-align:center !important;width:300px; }
+.ezoic-ad.banner-2105 { display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.medrectangle-1 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.medrectangle-1 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.medrectangle-1 { border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important; }
+.ezoic-ad.medrectangle-1108 { background:0 0 !important;display:flex !important;float:none;justify-content:space-between;line-height:0px;margin-bottom:15px !important;margin-left:auto !important;margin-right:auto !important;margin-top:15px !important;min-width:970px;padding:0;text-align:center !important;width:970px; }
+.ezoic-ad.medrectangle-2100 { display:inline-block;float:none;line-height:0px;margin-bottom:2px !important;margin-left:0px !important;margin-right:0px !important;margin-top:2px !important;min-height:90px;min-width:728px;padding:0; }
+.ezoic-ad{display:inline-block;border:0px;}.ezoic-ad>div>iframe{margin:0px!important;padding:0px!important;}
+.adtester-container-121,.adtester-container-115,.adtester-container-118,.adtester-container-124,.adtester-container-128,.adtester-container-122,.adtester-container-113,.adtester-container-127,.adtester-container-102,.adtester-container-109,.adtester-container-129,.adtester-container-110,.adtester-container-126,.adtester-container-120{display:none!important}
+.ezmob-footer{position:fixed;left:0;bottom:0;width:100%;background:#fff;z-index:100000;line-height:0}.ezmob-footer-desktop{background-color:rgba(255,255,255,.8);border-top:1px solid #d3d3d3;padding-top:5px}.ezmob-footer-close{cursor:pointer;color:#b2b2b2;border:1px solid #b2b2b2;border-radius:20px;background:#fff;line-height:20px;display:inline-block;font-size:20px;font-family:arial,sans-serif;padding:0 5px;position:absolute;top:5px;right:5px;height:24px;width:21px;text-align:center}body {
+				padding-bottom: 100px !important;
+				height: auto;
+			}
+			.ezmob-footer-close-mobile {
+			display:none;
+		}
+		
+
+		@media (min-width: 900px) {
+			.ez-sticky {
+				position: sticky;
+				position: -webkit-sticky;
+				top: 80px;
+				z-index:10;
+			}
+		}
+	</style><script type="text/javascript">var ezouid = "1";</script><meta http-equiv="origin-trial" content="A+b/H0b8RPXNaJgaNFpO0YOFuGK6myDQXlwnJB3SwzvNMfcndat4DZYMrP4ClJIzYWo3/yP2S+8FTZ/lpqbPAAEAAABueyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzVGhpcmRQYXJ0eSI6dHJ1ZX0="><meta http-equiv="origin-trial" content="A9ZgbRtm4pU3oZiuNzOsKcC8ppFSZdcjP2qYcdQrFKVzkmiWH1kdYY1Mi9x7G8+PS8HV9Ha9Cz0gaMdKsiVZIgMAAAB7eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AxL6oBxcpn5rQDPKSAs+d0oxNyJYq2/4esBUh3Yx5z8QfcLu+AU8iFCXYRcr/CEEfDnkxxLTsvXPJFQBxHfvkgMAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A9KPtG5kl3oLTk21xqynDPGQ5t18bSOpwt0w6kGa6dEWbuwjpffmdUpR3W+faZDubGT+KIk2do0BX2ca16x8qAcAAACBeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiVHJ1c3RUb2tlbnMiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A3HucHUo1oW9s+9kIKz8mLkbcmdaj5lxt3eiIMp1Nh49dkkBlg1Fhg4Fd/r0vL69mRRA36YutI9P/lJUfL8csQoAAACFeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A0OysezhLoCRYomumeYlubLurZTCmsjTb087OvtCy95jNM65cfEsbajrJnhaGwiTxhz38ZZbm+UhUwQuXfVPTg0AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="AxoOxdZQmIoA1WeAPDixRAeWDdgs7ZtVFfH2y19ziTgD1iaHE5ZGz2UdSjubkWvob9C5PrjUfkWi4ZSLgWk3Xg8AAACLeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="><meta http-equiv="origin-trial" content="A7+rMYR5onPnACrz+niKSeFdH3xw1IyHo2AZSHmxrofRk9w4HcQPMYcpBUKu6OQ6zsdxf4m/vqa6tG6Na4OLpAQAAAB4eyJvcmlnaW4iOiJodHRwczovL2ltYXNkay5nb29nbGVhcGlzLmNvbTo0NDMiLCJmZWF0dXJlIjoiQ29udmVyc2lvbk1lYXN1cmVtZW50IiwiZXhwaXJ5IjoxNjI2MjIwNzk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AwfG8hAcHnPa/kJ1Co0EvG/K0F9l1s2JZGiDLt2mhC3QI5Fh4qmsmSwrWObZFbRC9ieDaSLU6lHRxhGUF/i9sgoAAACBeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AwQ7dCmHkvR6FuOFxAuNnktYSQrGbL4dF+eBkrwNLALc69Wr//PnO1yzns3pjUoCaYbKHtVcnng2hU+8OUm0PAYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="AysVDPGQTLD/Scn78x4mLwB1tMfje5jwUpAAzGRpWsr1NzoN7MTFhT3ClmImi2svDZA7V6nWGIV8YTPsSRTe0wYAAACHeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXRhZ3NlcnZpY2VzLmNvbTo0NDMiLCJmZWF0dXJlIjoiSW50ZXJlc3RDb2hvcnRBUEkiLCJleHBpcnkiOjE2MjYyMjA3OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><script src="./Laravel 8.x Soft Delete Example Tutorial_files/pubads_impl_2021060301.js" async=""></script><!--<base href="https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6">--><base href="."><script type="text/javascript">
+var ezoTemplate = 'pub_site';
+if(typeof ezouid == 'undefined')
+{
+    var ezouid = 'none';
+}
+var ezoFormfactor = '1';
+var ezo_elements_to_check = Array();
+</script><!-- START EZHEAD -->
+<script data-ezscrex="false" type="text/javascript">
+var soc_app_id = '0';
+var did = 267458;
+var ezdomain = 'codecheef.org';
+var ezoicSearchable = 1;
+</script>
+<!--{jquery}-->
+<!-- END EZHEAD -->
+<script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none" defer="">__ez.queue.addFile('__ezf_ezosuigeneris', '//g.ezoic.net/ezosuigeneris.js?i=619cf34e405b70ae8007dbdbcf4f7a77', true, ["/detroitchicago/boise.js"], true, false, false, false);</script><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none" defer="">__ez.queue.addFile('__ezf_ezosuigenerisc', '//g.ezoic.net/ezosuigenerisc.js?nogen=1', true, ["/detroitchicago/boise.js"], true, false, false, false);</script>
+<script data-ezscrex="false" data-pagespeed-no-defer="" data-cfasync="false">
+function create_ezolpl(pvID, rv) {
+    var d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    __ez.ck.setByCat("ezux_lpl_267458=" + new Date().getTime() + "|" + pvID + "|" + rv + "; " + expires, 3);
+}
+function attach_ezolpl(pvID, rv) {
+    if (document.readyState === "complete") {
+        create_ezolpl(pvID, rv);
+    }
+    if(window.attachEvent) {
+        window.attachEvent("onload", create_ezolpl, pvID, rv);
+    } else {
+        if(window.onload) {
+            var curronload = window.onload;
+            var newonload = function(evt) {
+                curronload(evt);
+                create_ezolpl(pvID, rv);
+            };
+            window.onload = newonload;
+        } else {
+            window.onload = create_ezolpl.bind(null, pvID, rv);
+        }
+    }
+}
+
+__ez.queue.addFunc("attach_ezolpl", "attach_ezolpl", ["450fc5d9-a9e9-4678-7ca3-923695de6740", "true"], false, ['/detroitchicago/boise.js'], true, false, false, false);
+</script>
+<script type="text/javascript">var _audins_dom="codecheef_org",_audins_did=267458;__ez.queue.addFile('/detroitchicago/cmbv2.js', '/detroitchicago/cmbv2.js?gcb=194-0&cb=04-100-306-1007-109-50a-70d-30f-318-31c-122c-12e-212f-19&cmbcb=17&sj=x04x00x06x07x09x0ax0dx0fx18x1cx2cx2ex2f', true, [], true, false, true, false);</script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/cmbv2.js" async=""></script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/ezosuigeneris.js" async=""></script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/ezosuigenerisc(1).js" async=""></script><script src="./Laravel 8.x Soft Delete Example Tutorial_files/cse_element__en.js" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="./Laravel 8.x Soft Delete Example Tutorial_files/default+en.css"><link type="text/css" rel="stylesheet" href="./Laravel 8.x Soft Delete Example Tutorial_files/default.css"><style type="text/css">.gsc-control-cse{font-family:arial, sans-serif}.gsc-control-cse .gsc-table-result{font-family:arial, sans-serif}.gsc-refinementsGradient{background:linear-gradient(to left,rgba(255,255,255,1),rgba(255,255,255,0))}</style></head>
+ <body cz-shortcut-listen="true">
+ <button class="scrollToTop" title="Scroll to Top" type="button">▲</button>
+ <header id="aa-header">
+    <div class="aa-header-bottom">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-header-bottom-area">
+              <div class="aa-logo">
+                <a href="https://www.codecheef.org/">
+                 <img src="./Laravel 8.x Soft Delete Example Tutorial_files/logo.jpg" alt="logo img">
+                </a>
+              </div>
+              <div class="aa-cartbox">
+                 <a href="https://www.codecheef.org/all-laravel-posts" class="aa-browse-btn">LARAVEL COLLECTION</a>
+                 <a href="https://www.codecheef.org/guest-post" class="aa-browse-btn">ADVERTISEMENT</a>
+              </div>
+                <div id="search-box">
+                   <script>
+                     (function() {
+                	   var cx = "824fe7b0ca3347278";
+                	   var gcse = document.createElement("script");
+                	   gcse.type = "text/javascript";
+                	   gcse.async = true;
+                	   gcse.src = "https://cse.google.com/cse.js?cx=" + cx;
+                	   var s = document.getElementsByTagName("script")[0];
+                	   s.parentNode.insertBefore(gcse, s);
+                     })();
+                     window.onload = function()
+                     { 
+                	   var searchBox =  document.getElementById("gsc-i-id1");
+                	   searchBox.placeholder="Laravel....";
+                	   searchBox.title="Laravel...."; 
+                     }
+                   </script>
+                   <gcse:search></gcse:search>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <span id="ezoic-pub-ad-placeholder-130" class="ezoic-adpicker-ad"></span><span class="ezoic-ad box-2 box-2130 adtester-container adtester-container-130" data-ez-name="codecheef_org-box-2"><span id="div-gpt-ad-codecheef_org-box-2-0" ezaw="970" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:970px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-box-2-0')};</script></span></span></div>
+  </header>
+
+  <section id="menu">
+    <div class="container">
+      <div class="menu-area">
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>          
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li style="background-color: #0c8b39;"><a href="https://www.codecheef.org/">CC</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/algorithm">Algorithm</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/laravel">Laravel</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/javascript">JavaScript</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/php">PHP</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/wordpress">WordPress</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/jquery">jQuery</a></li>
+                <li><a href="https://www.codecheef.org/article/subcategory/collections">Eloquent Tips</a></li>
+                <li><a href="https://www.codecheef.org/article/tag/vue-js">Vue Js</a></li>  
+                <li><a href="https://www.codecheef.org/article/subcategory/react-js">React Js</a></li> 
+                <li><a href="https://www.codecheef.org/article/tag/linux">Linux</a></li>
+                <li><a href="https://www.codecheef.org/all-laravel-posts">300+ Laravel Articles</a></li>  
+            </ul>
+          </div>
+        </div>
+      </div> 
+     </div>
+  </section>
+    <!-- Blog Archive -->
+  <section id="aa-blog-archive">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-blog-archive-area">
+            <div class="row">
+
+              <div class="col-md-3">
+                  <aside class="aa-blog-sidebar blog-related single-class">
+    <div class="aa-sidebar-widget">
+        <ul>
+          <li>
+                    <a href="https://www.codecheef.org/article/learn-how-to-use-laravel-model-events" class="sidebar">How to Use Laravel Model Events</a> 
+                    <a href="https://www.codecheef.org/article/understanding-constructor-and-method-dependency-injection-in-laravel" class="sidebar">Laravel 8.x Constructor and Method Dependency Injection Example</a> 
+                    <a href="https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6" class="sidebar">Laravel 8.x Soft Delete Example Tutorial</a> 
+                    <a href="https://www.codecheef.org/article/how-to-create-and-use-custom-facade-in-laravel-6" class="sidebar">How to Create and Use Custom Facade in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-create-api-authentication-using-laravel-passport" class="sidebar">API Authentication Tutorial with Laravel Passport</a> 
+                    <a href="https://www.codecheef.org/article/delete-multiple-records-using-checkbox-in-laravel-6-and-vue-js" class="sidebar">Delete Multiple Rows using Checkbox in Laravel and Vue Js</a> 
+                    <a href="https://www.codecheef.org/article/laravel-livewire-run-your-php-code-like-javascipt" class="sidebar">Laravel 8.x Livewire Example - Run PHP Code Like JavaScipt</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-curl-request-example-using-ixudracurl-package" class="sidebar">Laravel 8.x curl request example using ixudra/curl package</a> 
+                    <a href="https://www.codecheef.org/article/laravel-vue-js-axios-get-request-example" class="sidebar">Laravel Vue JS Axios Get Request Example</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-ajax-crud-example-with-sweet-alert" class="sidebar">Laravel 8.x  Ajax CRUD Example with Sweet Alert</a> 
+                    <a href="https://www.codecheef.org/article/how-to-get-current-user-location-in-laravel" class="sidebar">How to Get Current User Location in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-ajax-image-upload-with-preview-using-base-64" class="sidebar">Laravel 8.x Ajax Image Upload with Preview</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-rest-api-with-jwt-authentication-with-crud" class="sidebar">Laravel 8.x Rest API CRUD Example with JWT Auth</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-guzzle-http-client-request-example" class="sidebar">Laravel 8.x Guzzle Http Client Request Example</a> 
+                    <a href="https://www.codecheef.org/article/laravel-6-rest-api-with-jwt-authentication" class="sidebar">Laravel 8.x  JWT (Json Web Token) Authentication Example</a> 
+                    <a href="https://www.codecheef.org/article/how-and-when-to-use-invokable-controllers-in-laravel" class="sidebar">How and When to Use Invokable Controllers in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/presence-channels-and-when-to-use-it-in-laravel-broadcasting" class="sidebar">Presence Channels and When to Use It in Laravel Broadcasting</a> 
+                    <a href="https://www.codecheef.org/article/fallback-route-redirect-automatically-404-page-in-laravel" class="sidebar">Fallback Route | Redirect Automatically 404 Page In Laravel</a> 
+                    <a href="https://www.codecheef.org/article/laravel-multiple-database-connections-example" class="sidebar">Laravel Multiple Database Connections Example</a> 
+                    <a href="https://www.codecheef.org/article/upload-file-and-download-hiding-real-url-in-laravel" class="sidebar">Upload File and Download Example In Laravel</a> 
+                    <a href="https://www.codecheef.org/article/laravel-cookie-example-set-and-get-cookie-in-laravel" class="sidebar">Laravel Cookie Example | Set and Get Cookie in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/how-to-use-carbon-in-laravel-blade-and-controller" class="sidebar">How to Use Carbon in Laravel Blade and Controller</a> 
+                    <a href="https://www.codecheef.org/article/laravel-7-current-url-example" class="sidebar">How to Get Current URL and Site URL in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/add-new-column-in-laravel-without-losing-data" class="sidebar">Add New Column in Laravel Without Losing Data</a> 
+                    <a href="https://www.codecheef.org/article/how-to-disable-csrf-token-protection-on-routes-example" class="sidebar">How to Disable CSRF Token Protection on Routes Example</a> 
+                    <a href="https://www.codecheef.org/article/laravel-7-role-based-authentication-tutorial" class="sidebar">Laravel 8.x Role Based Authentication Tutorial</a> 
+                    <a href="https://www.codecheef.org/article/use-tobase-in-eloquent-to-reduce-memory-in-laravel" class="sidebar">Use toBase in Eloquent to Reduce Memory in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/regex-strong-password-validation-example-in-laravel" class="sidebar">Regex Strong Password Validation Example in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/how-to-setup-summernote-editor-in-laravel" class="sidebar">How to Setup Summernote Editor in Laravel?</a> 
+                    <a href="https://www.codecheef.org/article/laravel-7-route-filtering-with-regular-expressions" class="sidebar">Laravel 8.x Route Filtering with Regular Expressions</a> 
+                    <a href="https://www.codecheef.org/article/how-to-get-only-year-month-and-day-from-timestamp-in-laravel" class="sidebar">How to get only year, month and day from timestamp in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/check-a-request-is-ajax-request-or-not-in-laravel" class="sidebar">Check a Request is Ajax Request or Not in Laravel</a> 
+                    <a href="https://www.codecheef.org/article/difference-between-bind-vs-singleton-when-and-what-to-choose" class="sidebar">Difference Between Bind vs Singleton: When and What to Choose?</a> 
+                    </li>
+        </ul>
+      </div>
+  </aside>
+              </div>
+
+              <div class="col-md-6">
+                 <div class="aa-blog-content aa-blog-details">
+   <section class="aa-blog-content-single"><span id="ezoic-pub-ad-placeholder-129" class="ezoic-adpicker-ad"></span>                        
+    <h1 style="color:#0f9d58; font-size: 20px; line-height:1.5em ">Laravel 8.x Soft Delete Example Tutorial</h1>
+
+      <div class="aa-article-bottom" style="margin-top:10px;">
+        <div class="aa-post-author">
+            Posted By 
+            <a href="https://www.codecheef.org/author/mahedi-hasan">
+                                Mahedi Hasan
+            </a>
+
+             Category 
+                          <a href="https://www.codecheef.org/article/category/framework">Framework</a>
+                           
+            Sub-category 
+                        <a href="https://www.codecheef.org/article/subcategory/intermediate-laravel">Laravel 6</a>
+                        </div>
+              <div class="aa-post-date">
+               January 31, 2020 
+              </div>
+          </div>
+            <div>
+                
+            </div>
+            <br><br>
+
+            <p></p><p>In this tutorial i am going to discuss about soft delete in laravel 8. I Will also show you how can we restore our deleted data and can again show it in our laravel application using laravel soft delete.&nbsp;</p>
+
+<p>When models are soft deleted, they are not actually removed from your database. Instead, a&nbsp;<strong><code>deleted_at</code>&nbsp;</strong>attribute is set on the model and inserted into the database. If a model has a non-null&nbsp;<strong><code>deleted_at</code>&nbsp;</strong>value, the model has been soft deleted.<span id="ezoic-pub-ad-placeholder-113" class="ezoic-adpicker-ad"></span></p>
+
+<p>In this tutorial i&nbsp;am using User model to our laravel soft delete example.&nbsp;To enable soft deletes for a model, use the&nbsp;<strong><code>Illuminate\Database\Eloquent\SoftDeletes</code></strong>&nbsp;trait on the model:&nbsp;<span id="ezoic-pub-ad-placeholder-125" class="ezoic-adpicker-ad"></span><span class="ezoic-ad banner-1 banner-1125 adtester-container adtester-container-125" data-ez-name="codecheef_org-banner-1"><span id="div-gpt-ad-codecheef_org-banner-1-0" ezaw="250" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;width:100%;max-width:1200px;margin-left:auto !important;margin-right:auto !important;min-height:250px;min-width:250px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-banner-1-0')};</script></span></span></p>
+
+<p><strong>app/User.php</strong></p>
+
+<pre><code class="language-php">namespace App;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class User extends Authenticatable
+{
+    use Notifiable,SoftDeletes;
+}
+</code></pre>
+
+<p>&nbsp;</p>
+
+<p>So, how to use in our project, so first when you create table moigration then you have to add&nbsp;<strong>softDeletes()</strong>. you can see like bellow example of migration.</p>
+
+<p><strong>database/migrations/users.php</strong></p>
+
+<pre><code class="language-php">public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table-&gt;bigIncrements('id');
+            $table-&gt;string('name');
+            $table-&gt;string('email',191)-&gt;unique();
+            $table-&gt;timestamp('email_verified_at')-&gt;nullable();
+            $table-&gt;string('password');
+            $table-&gt;softDeletes();
+            $table-&gt;rememberToken();
+            $table-&gt;timestamps();
+    });
+}</code></pre>
+
+<p>&nbsp;<span id="ezoic-pub-ad-placeholder-114" class="ezoic-adpicker-ad"></span><span class="ezoic-ad leader-1 leader-1114 adtester-container adtester-container-114" data-ez-name="codecheef_org-leader-1"><span id="div-gpt-ad-codecheef_org-leader-1-0" ezaw="336" ezah="280" style="position:relative;z-index:0;display:inline-block;padding:0;width:100%;max-width:1200px;margin-left:auto !important;margin-right:auto !important;min-height:280px;min-width:336px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-leader-1-0')};</script></span></span></p>
+
+<blockquote>
+<p><span style="color:#c0392b"><strong>Remember </strong></span>:&nbsp;The&nbsp;<strong><code>SoftDeletes</code>&nbsp;</strong>trait will automatically cast the&nbsp;<strong><code>deleted_at</code>&nbsp;</strong>attribute to a&nbsp;<code>DateTime</code>&nbsp;/&nbsp;<code>Carbon</code>&nbsp;instance for you.</p>
+</blockquote>
+
+<h1><span style="font-size:18px"><strong>Querying Soft Deleted Model :&nbsp;</strong></span></h1>
+
+<p>As noted above, soft deleted models will automatically be excluded from query results. However, you may force soft deleted models to appear in a result set using the&nbsp;<strong><code>withTrashed</code>&nbsp;</strong>method on the query:</p>
+
+<p>Now to check it works or not, just open command terminal and run this below command one after another.</p>
+
+<pre><code class="language-php">php artisan tinker
+
+factory(\App\User::class,1)-&gt;create()</code></pre>
+
+<p>&nbsp;</p>
+
+<p>After running this command, you will see one data is inserted into users table. See the below image.</p>
+
+<p><img alt="laravel-soft-delete-example" src="./Laravel 8.x Soft Delete Example Tutorial_files/laravel-soft-delete-example.jpeg"></p>
+
+<p>&nbsp;</p>
+
+<p>Now time to check soft delete in laravel 6, so retrieve this following data and delete it like below image using following command</p>
+
+<pre><code class="language-php">$user = \App\User::find(1)
+
+$user-&gt;delete()</code></pre>
+
+<p>&nbsp;</p>
+
+<p>Then you will see our data is deleted. See the below image<span id="ezoic-pub-ad-placeholder-116" class="ezoic-adpicker-ad"></span><span class="ezoic-ad large-mobile-banner-1 large-mobile-banner-1116 adtester-container adtester-container-116" data-ez-name="codecheef_org-large-mobile-banner-1"><span id="div-gpt-ad-codecheef_org-large-mobile-banner-1-0" ezaw="336" ezah="280" style="position:relative;z-index:0;display:inline-block;padding:0;width:100%;max-width:1200px;margin-left:auto !important;margin-right:auto !important;min-height:280px;min-width:336px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-large-mobile-banner-1-0')};</script></span></span></p>
+
+<p><img alt="soft-delete-example-laravel" src="./Laravel 8.x Soft Delete Example Tutorial_files/soft-delete-example-laravel.jpeg"></p>
+
+<p>&nbsp;</p>
+
+<p>Now have a look, our data is deleted now. if we wanna retrieve it like below query, it doesn't work. see the example</p>
+
+<p><img alt="laravel-soft-delete" src="./Laravel 8.x Soft Delete Example Tutorial_files/laravel-soft-delete.jpeg"></p>
+
+<p>&nbsp;</p>
+
+<p>look, this query didn't find our deleted data. So time to make query with&nbsp;<strong><code>withTrashed.&nbsp;</code></strong><code>So let's have a try</code></p>
+
+<p><img alt="with-trashed-soft-delete-laravel" src="./Laravel 8.x Soft Delete Example Tutorial_files/with-trashed-soft-delete-laravel.jpeg"></p>
+
+<p>&nbsp;</p>
+
+<p>Boom, our deleted data is here. So we can get back our deleted data using <strong>withTrashed()</strong>. but do you, we can aslo restore it and can back it with normal eloquent query. Just we have to restore it for doing it.</p>
+
+<p><img alt="restore-laravel-soft-delete" src="./Laravel 8.x Soft Delete Example Tutorial_files/restore-laravel-soft-delete.jpeg">&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Look after restore it, we can retrieve this data with norlam eloquent query, we don't need to use <strong>withTrashed()</strong> to back it. But if we forceDelete it, then we never back it.&nbsp;</p>
+
+<p><img alt="force-delete-laravel-soft-delete-example" src="./Laravel 8.x Soft Delete Example Tutorial_files/force-delete-laravel-soft-delete-example.jpeg"></p>
+
+<p>&nbsp;</p>
+
+<p>Look after force delete it, now there is no data with withTrashed query also. hope you will understand all those thing. Now check all the command and query with one single file.</p>
+
+<pre><code class="language-php">php artisan tinker
+
+factory(\App\User::class,1)-&gt;create()
+
+Illuminate\Database\Eloquent\Collection {
+     all: [
+       App\User {
+         name: "Zachariah Thiel DDS",
+         email: "corrine05@example.net",
+         email_verified_at: "2020-01-31 10:45:13",
+         updated_at: "2020-01-31 10:45:13",
+         created_at: "2020-01-31 10:45:13",
+         id: 1,
+       },
+     ],
+   }
+
+$user = \App\User::find(1)
+
+App\User {
+
+     id: 1,
+     name: "Zachariah Thiel DDS",
+     email: "corrine05@example.net",
+     email_verified_at: "2020-01-31 10:45:13",
+     deleted_at: null,
+     created_at: "2020-01-31 10:45:13",
+     updated_at: "2020-01-31 10:45:13",
+   }
+
+$user-&gt;delete()
+true
+
+$user = \App\User::find(1)
+null
+
+$user = \App\User::where('id',1)-&gt;get()
+Illuminate\Database\Eloquent\Collection {
+     all: [],
+   }
+$user = \App\User::where('id',1)-&gt;first()
+null
+
+$user = \App\User::where('id',1)-&gt;withTrashed()-&gt;first()
+ App\User {
+     id: 1,
+     name: "Zachariah Thiel DDS",
+     email: "corrine05@example.net",
+     email_verified_at: "2020-01-31 10:45:13",
+     deleted_at: "2020-01-31 10:46:38",
+     created_at: "2020-01-31 10:45:13",
+     updated_at: "2020-01-31 10:46:38",
+   }
+
+$user-&gt;restore()
+true
+
+$user = \App\User::find(1)
+App\User {
+     name: "Zachariah Thiel DDS",
+     email: "corrine05@example.net",
+     email_verified_at: "2020-01-31 10:45:13",
+     deleted_at: null,
+     created_at: "2020-01-31 10:45:13",
+     updated_at: "2020-01-31 10:50:52",
+   }
+
+$user-&gt;forceDelete()
+true
+$user = \App\User::where('id',1)-&gt;withTrashed()-&gt;first()
+null
+
+</code></pre>
+
+<p>&nbsp;</p>
+
+<blockquote>
+<p><strong>Read also :&nbsp;<a href="https://www.codecheef.org/article/understanding-constructor-and-method-dependency-injection-in-laravel" target="_self"><span style="color:#c0392b">Understanding Constructor and Method Dependency Injection in Laravel</span></a></strong></p>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p>if you like this tutorial, please share with your friends. Hope it can help you.&nbsp;</p>
+
+<p>&nbsp;</p><p></p>
+            
+            <div class="blog-single-tag">
+                                 
+                 <a class="tag-custom" href="https://www.codecheef.org/article/tag/laravel-6" style="background:#178618">
+                #laravel-6
+                </a>
+                                 
+                 <a class="tag-custom" href="https://www.codecheef.org/article/tag/laravel" style="background:#373173">
+                #laravel
+                </a>
+                                 
+                 <a class="tag-custom" href="https://www.codecheef.org/article/tag/laravel-eloquent" style="background:#110050">
+                #laravel-eloquent
+                </a>
+                                 
+                 <a class="tag-custom" href="https://www.codecheef.org/article/tag/soft-delete" style="background:#680898">
+                #soft-delete
+                </a>
+                   
+            </div>
+          
+             <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="blog-single-social">
+            
+              </div>
+            </div>
+      </section>
+
+          <!-- blog navigation -->
+          <div class="aa-blog-navigation">
+                                    <a class="aa-blog-prev" href="https://www.codecheef.org/article/understanding-constructor-and-method-dependency-injection-in-laravel"><span class="fa fa-arrow-left"></span>Prev Post</a>
+            
+                        <a class="aa-blog-next" href="https://www.codecheef.org/article/how-to-create-and-use-custom-facade-in-laravel-6">Next Post<span class="fa fa-arrow-right"></span></a>
+                      </div>
+
+        <div id="author-info">
+            <div class="parent-box">
+                                    <img src="./Laravel 8.x Soft Delete Example Tutorial_files/HZh78C0DTpa2YzBt9Rf3.png" class="avatar avatar-120 photo" style="height:100px">
+                    
+                <div class="author-latest-post-box" style="font-size:15px;">
+                    <a href="https://www.facebook.com/chiefcode/" class="author-latest-post">Facebook</a>
+                    <a href="https://github.com/techmahedy" class="author-latest-post">Github</a> <br>
+                    A web enthusiastic, self-motivated Full-Stack Web Developer from Dhaka, Bangladesh with experience in developing applications using Laravel Vue and React Js Application.
+                </div>
+            </div>
+        </div>
+
+     <div id="author-info">
+         <div class="sharethis-inline-share-buttons"></div>
+    </div>
+    
+    <div id="author-info">
+        
+    </div>
+</div>
+              </div>
+
+
+              <div class="col-md-3 sidebard"><span id="ezoic-pub-ad-placeholder-103" class="ezoic-adpicker-ad"></span><span class="ezoic-ad box-1 box-1103 adtester-container adtester-container-103" data-ez-name="codecheef_org-box-1"><span id="div-gpt-ad-codecheef_org-box-1-0" ezaw="250" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;width:100%;max-width:1200px;margin-left:auto !important;margin-right:auto !important;min-height:250px;min-width:250px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-box-1-0')};</script></span><span style="width:250px;display:block;height:14px;margin:auto" class="reportline"><span style="text-align:center;font-size: smaller;float:left;line-height:normal;"><a href="https://www.ezoic.com/what-is-ezoic/" target="_blank" rel="noopener noreferrer nofollow" style="cursor:pointer"><img src="./Laravel 8.x Soft Delete Example Tutorial_files/ezoic.png" alt="Ezoic" style="height:12px !important; padding:2px !important; border:0px !important; cursor:pointer !important; width: 58px !important; margin:0 !important; box-sizing: content-box !important;"></a></span><span class="ez-report-ad-button" name="?pageview_id=450fc5d9-a9e9-4678-7ca3-923695de6740&amp;ad_position_id=103&amp;impression_group_id=codecheef_org-box-1/2021-06-10/1266196&amp;ad_size=250x250&amp;domain_id=267458&amp;url=https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6" style="cursor: pointer!important; font-size:12px !important;color: #a5a5a5 ;float:right;text-decoration:none !important;font-family:arial !important;line-height:normal;">report this ad</span></span></span>
+               <aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+        
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+  <div class="aa-sidebar-widget"></div>
+</aside>
+<aside class="aa-blog-sidebar">
+  <div class="aa-sidebar-widget">
+       <ul>
+          <li>
+             <a href="https://www.codecheef.org/article/subcategory/collections" class="sidebar">Laravel Collection Method Example</a>
+          </li>
+       </ul>
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+    <h3 class="sidebar-font">Featured Article</h3>
+        <ul>
+          <li>
+                             <a href="https://www.codecheef.org/article/some-laravel-best-practices-every-developer-should-know" class="sidebar">Some Laravel Best Practices Every Developer Should Know</a>
+                             <a href="https://www.codecheef.org/article/real-time-event-broadcasting-with-laravel-6-and-pusher" class="sidebar">Real Time Broadcasting with Laravel 8.x Vuejs and Pusher</a>
+                             <a href="https://www.codecheef.org/article/laravel-passport-scope-tutorial-api-permissions-using-passport-scope" class="sidebar">Laravel 8.x API Permissions Using Passport Scope</a>
+                             <a href="https://www.codecheef.org/article/laravel-and-n-1-problem-how-to-fix-n1-problem" class="sidebar">Laravel and N + 1 Problem | How To Fix N + 1 Problem</a>
+                             <a href="https://www.codecheef.org/article/laravel-queues-example-using-redis-and-horizon" class="sidebar">Laravel 8.x Queues Example with Redis and Horizon</a>
+                             <a href="https://www.codecheef.org/article/how-to-use-circuit-breaker-design-pattern-in-laravel" class="sidebar">How to Use Circuit Breaker Design Pattern in Laravel</a>
+                             <a href="https://www.codecheef.org/article/avoid-pivot-table-and-use-json-column-in-laravel" class="sidebar">Avoid Pivot Table and Use Json Column in Laravel</a>
+                       </li>
+         </ul>  
+   </div>
+</aside><span id="ezoic-pub-ad-placeholder-104" class="ezoic-adpicker-ad"></span><span class="ezoic-ad large-billboard-2 large-billboard-2104 adtester-container adtester-container-104 ezoic-ad-adaptive" data-ez-name="codecheef_org-large-billboard-2"><span class="ezoic-ad large-billboard-2 large-billboard-2-multi-104 adtester-container adtester-container-104" data-ez-name="codecheef_org-large-billboard-2"><span id="div-gpt-ad-codecheef_org-large-billboard-2-0" ezaw="300" ezah="262" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:262px;min-width:300px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-large-billboard-2-0')};</script></span></span><span class="ezoic-ad large-billboard-2 large-billboard-2-multi-104 adtester-container adtester-container-104" data-ez-name="codecheef_org-large-billboard-2"><span id="div-gpt-ad-codecheef_org-large-billboard-2-0_1" ezaw="300" ezah="262" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:262px;min-width:300px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-large-billboard-2-0_1')};</script></span></span><span class="ezoic-ad large-billboard-2 large-billboard-2-multi-104 adtester-container adtester-container-104" data-ez-name="codecheef_org-large-billboard-2"><span id="div-gpt-ad-codecheef_org-large-billboard-2-0_2" ezaw="300" ezah="262" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:262px;min-width:300px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-large-billboard-2-0_2')};</script></span></span><span class="ezoic-ad large-billboard-2 large-billboard-2-multi-104 adtester-container adtester-container-104" data-ez-name="codecheef_org-large-billboard-2"><span id="div-gpt-ad-codecheef_org-large-billboard-2-0_3" ezaw="300" ezah="262" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:262px;min-width:300px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-large-billboard-2-0_3')};</script></span></span><style> .large-billboard-2-multi-104{border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:3px !important;margin-left:0px !important;margin-right:0px !important;margin-top:7px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important;}</style></span>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+        
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+        
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+        
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+    <h3 class="sidebar-font">Recent Article</h3>
+        <ul>
+          <li>
+                             <a href="https://www.codecheef.org/article/redirect-user-after-submit-form-in-react-example" class="sidebar">Redirect User After Submit Form in React Example</a>
+                             <a href="https://www.codecheef.org/article/how-to-install-and-use-ckeditor-with-formik-in-react" class="sidebar">How to Install and Use CKEditor with Formik in React</a>
+                             <a href="https://www.codecheef.org/article/react-image-upload-example-with-preview-using-formik" class="sidebar">React Image Upload Example with Preview using Formik</a>
+                             <a href="https://www.codecheef.org/article/how-to-generate-qr-code-in-php-laravel" class="sidebar">How to Generate QR Code in PHP Laravel</a>
+                             <a href="https://www.codecheef.org/article/react-password-and-confirm-password-validation-using-yup" class="sidebar">React Password and Confirm Password Validation using Yup</a>
+                       </li>
+         </ul>  
+   </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">
+        
+    </div>
+</aside>
+<aside class="aa-blog-sidebar">
+    <div class="aa-sidebar-widget">   
+    <h3 class="sidebar-font">Popular Article</h3>
+        <ul>
+          <li>
+                         <a href="https://www.codecheef.org/article/user-roles-and-permissions-tutorial-in-laravel-without-packages" class="sidebar">Laravel 8 Roles and Permissions Without Package</a>
+                         <a href="https://www.codecheef.org/article/vue-laravel-crud-example-with-vue-router-and-sweet-alert" class="sidebar">Laravel 8.x Vue js CRUD Example With Vue Router</a>
+                         <a href="https://www.codecheef.org/article/laravel-7x-custom-login-and-registration-example" class="sidebar">Laravel 8.x Custom Login and Registration Example</a>
+                         <a href="https://www.codecheef.org/article/laravel-6-rest-api-with-jwt-authentication-with-crud" class="sidebar">Laravel 8.x Rest API CRUD Example with JWT Auth</a>
+                         <a href="https://www.codecheef.org/article/multi-step-form-submit-in-laravel-with-validation" class="sidebar">Multi Step Form Submit in Laravel 8.x  with Validation</a>
+                         
+          </li>
+      </ul>
+    </div>
+</aside>
+
+                  <span id="ezoic-pub-ad-placeholder-105" class="ezoic-adpicker-ad"></span><span class="ezoic-ad banner-2 banner-2105 adtester-container adtester-container-105 ez-sticky" data-ez-name="codecheef_org-banner-2"><span id="div-gpt-ad-codecheef_org-banner-2-0" ezaw="300" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:300px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-banner-2-0')};</script></span><span style="width:300px;display:block;height:14px;margin:auto" class="reportline"><span style="text-align:center;font-size: smaller;float:left;line-height:normal;"><a href="https://www.ezoic.com/what-is-ezoic/" target="_blank" rel="noopener noreferrer nofollow" style="cursor:pointer"><img src="./Laravel 8.x Soft Delete Example Tutorial_files/ezoic.png" alt="Ezoic" style="height:12px !important; padding:2px !important; border:0px !important; cursor:pointer !important; width: 58px !important; margin:0 !important; box-sizing: content-box !important;"></a></span><span class="ez-report-ad-button" name="?pageview_id=450fc5d9-a9e9-4678-7ca3-923695de6740&amp;ad_position_id=105&amp;impression_group_id=codecheef_org-banner-2/2021-06-10/1285246&amp;ad_size=300x250&amp;domain_id=267458&amp;url=https://www.codecheef.org/article/learn-how-to-use-soft-delete-in-laravel-6" style="cursor: pointer!important; font-size:12px !important;color: #a5a5a5 ;float:right;text-decoration:none !important;font-family:arial !important;line-height:normal;">report this ad</span></span></span></div>
+            </div>
+           
+          <span id="ezoic-pub-ad-placeholder-108" class="ezoic-adpicker-ad"></span><span class="ezoic-ad medrectangle-1 medrectangle-1108 adtester-container adtester-container-108 ezoic-ad-adaptive" data-ez-name="codecheef_org-medrectangle-1"><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-108 adtester-container adtester-container-108" data-ez-name="codecheef_org-medrectangle-1"><span id="div-gpt-ad-codecheef_org-medrectangle-1-0" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-medrectangle-1-0')};</script></span></span><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-108 adtester-container adtester-container-108" data-ez-name="codecheef_org-medrectangle-1"><span id="div-gpt-ad-codecheef_org-medrectangle-1-0_1" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-medrectangle-1-0_1')};</script></span></span><span class="ezoic-ad medrectangle-1 medrectangle-1-multi-108 adtester-container adtester-container-108" data-ez-name="codecheef_org-medrectangle-1"><span id="div-gpt-ad-codecheef_org-medrectangle-1-0_2" ezaw="323" ezah="250" style="position:relative;z-index:0;display:inline-block;padding:0;min-height:250px;min-width:323px;" class="ezoic-ad"><script data-ezscrex="false" data-cfasync="false" type="text/javascript" style="display:none;">if(typeof __ez_fad_position != 'undefined'){__ez_fad_position('div-gpt-ad-codecheef_org-medrectangle-1-0_2')};</script></span></span><style> .medrectangle-1-multi-108{border:none !important;display:block !important;float:none;line-height:0px;margin-bottom:15px !important;margin-left:0px !important;margin-right:0px !important;margin-top:15px !important;min-height:250px;min-width:300px;padding:0;text-align:center !important;}</style></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / Blog Archive -->
+
+<!-- footer -->  
+  <footer id="aa-footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 col-sm">
+          <div class="row f-parent">
+               
+            <div class="col col-sm">
+               <div class="single-footer-widget">
+             <h3 class="we-d lobster">CODECHEEF</h3>
+               <ul class="company">
+                  <li><a href="https://www.codecheef.org/about-us">About Us</a></li>
+                  <li><a href="https://www.codecheef.org/contact-us">Contact Us</a></li>
+                  <li><a href="https://www.codecheef.org/privacy-policy">Privacy Policy</a></li>
+                  <li><a href="https://www.codecheef.org/terms-and-conditions">Terms &amp; Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col col-sm">
+            <div class="single-footer-widget">
+             <h3 class="we-d lobster">ADDITIONAL LINKS</h3>
+               <ul class="company">
+                  <li><a href="https://www.codecheef.org/faq">FAQ</a></li>
+                  <li><a href="https://www.codecheef.org/archives">Archives</a></li>
+                  <li><a href="https://www.codecheef.org/disclaimer">Disclaimer</a></li> 
+                  <li><a href="https://www.codecheef.org/all-tags">Tags Clouds</a></li>
+              </ul>
+            </div>
+          </div>
+
+            <div class="col col-sm">
+               <div class="single-footer-widget">
+             <h3 class="we-d lobster">QUICK LINKS</h3>
+               <ul class="company">
+                  <li><a href="https://www.codecheef.org/article/tag/vue-js" target="_blank">Vue Js</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/laravel">Laravel</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/react-js">React Js</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/wordpress" target="_blank">WordPress</a></li>
+               </ul>
+              </div>
+            </div>
+            
+            
+            <div class="col col-sm">
+               <div class="single-footer-widget">
+             <h3 class="we-d lobster">PRACTICE</h3>
+               <ul class="company">
+                  <li><a href="https://www.codecheef.org/article/tag/crud" target="_blank">All Crud</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/api">Rest Api</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/file-upload">File Upload</a></li>
+                  <li><a href="https://www.codecheef.org/article/tag/notification" target="_blank">Notification</a></li>
+               </ul>
+              </div>
+            </div>
+
+            <div class="col col-sm">
+                  <div class="single-footer-widget">
+              <div class="footer-social-icon">
+                <h3 class="border-cc">CC</h3>
+                <i class="fa fa-male"></i>
+              </div>
+              <p>Wanna share your business with codecheef readers then follow this links <a href="https://www.codecheef.org/guest-post" style="color:#0f9d58;">Advertisement</a> </p>
+            </div>
+            </div>
+
+
+            <div class="col col-sm">
+              <div class="single-footer-widget">
+              <h3 class="subscribe-title">OUR NEWSLETTER</h3>
+               <p>To get daily update , subscribe our newsletter.</p>
+      
+                <div id="aa-subscribe">    
+                  <div class="aa-subscribe-area">
+                    <form action="https://www.codecheef.org/newsletter" class="aa-subscribe-form" method="post">
+                            <input type="hidden" name="_token" value="1MGNxhtdvytdsSrUwDpCRr03sMHV5eMMmaMkeKDL">                         <input type="email" name="email" placeholder="Your email" required="" style="width:130px">
+                         <input type="submit" value="Join" style="background-color:#0f9d58; color:white;">
+                   </form>
+                 </div>
+               </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+       <div class="col-md-1"></div>
+      </div>
+      <div class="row">
+        <div class="footer-bottom">
+          <div class="footer-socil-icon social-height">
+            <a href="https://www.facebook.com/chiefcode/"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/metacentric_sr"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/mahedi-hasan-durjoy-9bb880175/"><i class="fa fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/channel/UCzmJ_0Ef9EE-NS7w82zez_A"><i class="fa fa-youtube"></i></a>
+            <a href="https://github.com/techmahedy"><i class="fa fa-github"></i></a>
+          </div>
+            <div class="copywrite" style="margin-bottom:10px;">
+              © All Right Reserved by <a href="https://www.codecheef.org/">CodeCheef | A Blue Print For Programmers</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- / footer -->
+
+  <script src="./Laravel 8.x Soft Delete Example Tutorial_files/jquery.min.js"></script>
+  <script src="./Laravel 8.x Soft Delete Example Tutorial_files/custom.js"></script> 
+    <script src="./Laravel 8.x Soft Delete Example Tutorial_files/prism.js"></script><iframe src="./Laravel 8.x Soft Delete Example Tutorial_files/portal-v2.html" id="st_gdpr_iframe" title="GDPR Consent Management" style="width: 0px; height: 0px; position: absolute; left: -5000px;"></iframe></body></html>

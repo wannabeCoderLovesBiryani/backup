@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://medium.com/media/3a9f2da8bc33e16924d71dafc2b62357 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>notes migration – Medium</title><meta name="description" content="notes migration. GitHub Gist: instantly share code, notes, and snippets."><meta name="twitter:widgets:csp" content="on"><meta name="robots" content="noindex"><!--<base target="_blank">--><base href="." target="_blank"><style>body {text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: "ff-tisa-web-pro", Georgia, Cambria, "Times New Roman", Times, serif; font-weight: 400; color: #333332; font-size: 18px; line-height: 1.4; margin: 0; background-color: white; overflow: hidden;}iframe {max-width: 100%;}</style></head><body><div id="cf_alert_div" style="margin: 0;padding: 0;position: relative;top: 0;left: 0;display: block; z-index: 1000"><div style="margin: 0px;padding: 10px;border-bottom: 1px solid #a5a5a5;background: #f0f0f0;font-weight: normal;text-align: left;"><table width="100%"><tbody><tr><td valign="top"><a href="https://medium.com/media/3a9f2da8bc33e16924d71dafc2b62357#" onclick="document.cookie=&#39;cf_use_ob=0;path=/&#39;;window.location.reload();return false;" style="margin: 0 20px 0 0;padding: 10px 0 0 20px;text-decoration: none;font: 12px Helvetica,Arial,sans-serif;color: #eff7e8;font-weight: bold;text-align: left;position: relative;display: inline-block;height: 38px;background: url(/cdn-cgi/images/retry.png) no-repeat 0 0;overflow: visible;font-size: 14px;line-height: 1.2em;text-shadow: #437b0a 0 1px 0;white-space: nowrap;">Retry for a live version<span style="margin: 0;padding: 0;position: absolute;top: 0;left: 100%;width: 20px;height: 38px;background: url(/cdn-cgi/images/retry.png) no-repeat 100% -38px;"></span></a> <noscript style="margin: 10px 0 10px 0;padding: 0;font: 12px Helvetica,Arial,sans-serif;color: #404040;display: block;">(Enable Javascript first.)</noscript></td><td valign="middle" style="margin: 0;padding: 0;"><p style="margin: 0 0 0 20px;padding: 0;font: 12px Helvetica,Arial,sans-serif;color: #404040;">This page (<a href="https://medium.com/media/3a9f2da8bc33e16924d71dafc2b62357" style="margin: 0;padding: 0;text-decoration: underline;font: 12px Helvetica,Arial,sans-serif;color: #007ed9;font-weight: normal;text-align: left;">https://medium.com/media/3a9f2da8bc33e16924d71dafc2b62357</a>) is currently offline. However, because the site uses Cloudflare's Always Online™ technology you can continue to surf a snapshot of the site. We will keep checking in the background and, as soon as the site comes back, you will automatically be served the live version. <span id="caption" style="margin: 0;padding: 0;color: #a5a5a5;">Always Online™ is powered by <a rel="noopener noreferrer" href="https://www.cloudflare.com/5xx-error-landing/" target="_blank" style="margin: 0;padding: 0;text-decoration: underline;font: 12px Helvetica,Arial,sans-serif;color: #007ed9;font-weight: normal;text-align: left;">Cloudflare</a> | <a href="javascript:void(null);" onclick="document.getElementById(&#39;cf_alert_div&#39;).style.display=&#39;none&#39;;" style="margin: 0;padding: 0;text-decoration: underline;font: 12px Helvetica,Arial,sans-serif;color: #007ed9;font-weight: normal;text-align: left;">Hide this Alert</a></span></p></td></tr></tbody></table></div></div><style>.gist .gist-file { margin-bottom: 0 !important; }.gist { text-rendering: auto; }</style><script src="./c302fc017a8849d1b11180705536cc58.js" charset="utf-8"></script><link rel="stylesheet" href="./gist-embed-f710d4a619fe68a1be4400197b4c3132.css"><div id="gist95815214" class="gist">
+    <div class="gist-file">
+      <div class="gist-data">
+        <div class="js-gist-file-update-container js-task-list-container file-box">
+  <div id="file-2019_04_18_190713_create_notes_table-php" class="file my-2">
+    
+  <div itemprop="text" class="Box-body p-0 blob-wrapper data type-php  ">
+      
+<table class="highlight tab-size js-file-line-container" data-tab-size="8" data-paste-markdown-skip="">
+      <tbody><tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-ent">&lt;?php</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC2" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-k">use</span> <span class="pl-v">Illuminate</span>\<span class="pl-v">Support</span>\<span class="pl-v">Facades</span>\<span class="pl-v">Schema</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC4" class="blob-code blob-code-inner js-file-line"><span class="pl-k">use</span> <span class="pl-v">Illuminate</span>\<span class="pl-v">Database</span>\<span class="pl-v">Schema</span>\<span class="pl-v">Blueprint</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC5" class="blob-code blob-code-inner js-file-line"><span class="pl-k">use</span> <span class="pl-v">Illuminate</span>\<span class="pl-v">Database</span>\<span class="pl-v">Migrations</span>\<span class="pl-v">Migration</span>;</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC6" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-v">CreateNotesTable</span> <span class="pl-k">extends</span> <span class="pl-v">Migration</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC8" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC9" class="blob-code blob-code-inner js-file-line">    <span class="pl-c">/**</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     * Run the migrations.</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     *</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC12" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     * @return void</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     */</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">up</span>()</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC15" class="blob-code blob-code-inner js-file-line">    {</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC16" class="blob-code blob-code-inner js-file-line">        <span class="pl-v">Schema</span>::<span class="pl-en">create</span>(<span class="pl-s">'notes'</span>, <span class="pl-k">function</span> (<span class="pl-smi">Blueprint</span> <span class="pl-s1"><span class="pl-c1">$</span>table</span>) {</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC17" class="blob-code blob-code-inner js-file-line">            <span class="pl-s1"><span class="pl-c1">$</span>table</span>-&gt;<span class="pl-en">bigIncrements</span>(<span class="pl-s">'id'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC18" class="blob-code blob-code-inner js-file-line">            <span class="pl-s1"><span class="pl-c1">$</span>table</span>-&gt;<span class="pl-en">string</span>(<span class="pl-s">'name'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC19" class="blob-code blob-code-inner js-file-line">            <span class="pl-s1"><span class="pl-c1">$</span>table</span>-&gt;<span class="pl-en">timestamps</span>();</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC20" class="blob-code blob-code-inner js-file-line">        });</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC21" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC22" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC23" class="blob-code blob-code-inner js-file-line">    <span class="pl-c">/**</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     * Reverse the migrations.</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC25" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     *</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC26" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     * @return void</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC27" class="blob-code blob-code-inner js-file-line"><span class="pl-c">     */</span></td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC28" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">down</span>()</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC29" class="blob-code blob-code-inner js-file-line">    {</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC30" class="blob-code blob-code-inner js-file-line">        <span class="pl-v">Schema</span>::<span class="pl-en">dropIfExists</span>(<span class="pl-s">'notes'</span>);</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC31" class="blob-code blob-code-inner js-file-line">    }</td>
+      </tr>
+      <tr>
+        <td id="file-2019_04_18_190713_create_notes_table-php-L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="file-2019_04_18_190713_create_notes_table-php-LC32" class="blob-code blob-code-inner js-file-line">}</td>
+      </tr>
+</tbody></table>
+
+
+  </div>
+
+  </div>
+</div>
+
+      </div>
+      <div class="gist-meta">
+        <a href="https://gist.github.com/chrisoemma/c302fc017a8849d1b11180705536cc58/raw/3cf274b19b0aac80b0c67f3e5d94357ea5e0d6a3/2019_04_18_190713_create_notes_table.php" style="float:right">view raw</a>
+        <a href="https://gist.github.com/chrisoemma/c302fc017a8849d1b11180705536cc58#file-2019_04_18_190713_create_notes_table-php">2019_04_18_190713_create_notes_table.php</a>
+        hosted with ❤ by <a href="https://github.com/">GitHub</a>
+      </div>
+    </div>
+</div>
+<script>var height = -1; var delayMs = 200; if (document) {document.domain = document.domain;}function notifyResize(height) {height = height ? height : document.documentElement.offsetHeight; var resized = false; if (window.donkey && donkey.resize) {donkey.resize(height);var elements = document.getElementsByClassName("gist-data"); for (var i = 0; i < elements.length; i++) {elements[i].style.overflow = "visible"}resized = true;}if (parent && parent._resizeIframe) {var obj = {iframe: window.frameElement, height: height}; parent._resizeIframe(obj); resized = true;}if (window.location && window.location.hash === "#amp=1" && window.parent && window.parent.postMessage) {window.parent.postMessage({sentinel: "amp", type: "embed-size", height: height}, "*");}if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.resize) {window.webkit.messageHandlers.resize.postMessage(height); resized = true;}return resized;}function maybeResize() {try {if (document.documentElement.offsetHeight != height && notifyResize()) {height = document.documentElement.offsetHeight;}delayMs = Math.min(delayMs * 2, 1000000); setTimeout(maybeResize, delayMs);} catch(error) {console.log('maybeResize error: ', error)}}maybeResize();</script><script defer="" src="./beacon.min.js" data-cf-beacon="{&quot;rayId&quot;:&quot;65d563f17f1990ca&quot;,&quot;token&quot;:&quot;0b5f665943484354a59c39c6833f7078&quot;,&quot;version&quot;:&quot;2021.5.2&quot;,&quot;si&quot;:10}"></script>
+</body></html>
